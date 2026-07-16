@@ -129,14 +129,6 @@
       }
     }
 
-    function b64KeUtf8(b64) {
-      try {
-        return new TextDecoder().decode(Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); }));
-      } catch (e) {
-        return decodeURIComponent(escape(atob(b64)));
-      }
-    }
-
     function parseFrontmatter(raw) {
       var result = { title: 'Tanpa Judul', date: new Date().toISOString(), tags: [], mood: '', music: '', album_art: '', image: '', content: raw };
       try {
@@ -246,56 +238,34 @@
       }
     }
 
-    function ambilDariApi(repo, token) {
-      var headers = token ? { 'Authorization': 'token ' + token } : {};
-      var url = 'https://api.github.com/repos/' + repo + '/contents/journals/';
-
-      fetch(url, { headers: headers })
+    function ambilDariApi() {
+      fetch('/.netlify/functions/journals')
         .then(function (res) {
-          if (!res.ok) throw new Error('Gagal membaca direktori journals (HTTP ' + res.status + ')');
+          if (!res.ok) return res.json().then(function (d) { throw new Error(d.error || 'HTTP ' + res.status); });
           return res.json();
         })
-        .then(function (files) {
-          if (!Array.isArray(files) || files.length === 0) {
+        .then(function (journals) {
+          if (!journals || !journals.length) {
             renderDaftar([]);
             return;
           }
-
-          var mdFiles = files.filter(function (f) { return f.name.endsWith('.md'); });
-          var promises = mdFiles.map(function (f) {
-            return fetch(f.url, { headers: headers })
-              .then(function (r) {
-                if (!r.ok) throw new Error('Gagal mengambil ' + f.name);
-                return r.json();
-              })
-              .then(function (content) {
-                var raw = b64KeUtf8(content.content);
-                return parseFrontmatter(raw);
-              });
+          var data = journals.map(function (j) {
+            return parseFrontmatter(j.content);
           });
-
-          return Promise.all(promises);
-        })
-        .then(function (data) {
-          if (data) {
-            simpanData(data);
-            renderDaftar(data);
-          }
+          simpanData(data);
+          renderDaftar(data);
         })
         .catch(function (err) {
-          console.error('API gagal, fallback ke data lokal: ' + err.message);
+          console.error('Gagal ambil jurnal:', err.message);
           simpanData(MOCK);
           renderDaftar(MOCK);
-          if (repo) {
-            document.getElementById('journal-list').insertAdjacentHTML('afterbegin',
-              '<p class="text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded p-3 text-sm mb-4">Gagal memuat jurnal dari GitHub. Menampilkan data lokal sebagai gantinya.</p>');
-          }
+          var wadah = document.getElementById('journal-list');
+          wadah.insertAdjacentHTML('afterbegin',
+            '<p class="text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded p-3 text-sm mb-4">Gagal memuat jurnal. ' + err.message + '</p>');
         });
     }
 
     function muatJurnal() {
-      var repo = localStorage.getItem('jurnal_gh_repo');
-      var token = localStorage.getItem('jurnal_gh_token');
       var wadah = document.getElementById('journal-list');
       wadah.innerHTML =
         '<div class="animate-pulse space-y-6">' +
@@ -303,12 +273,7 @@
           '<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5"><div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3"></div><div class="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-3"></div><div class="h-3 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div><div class="h-3 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div></div>' +
         '</div>';
 
-      if (repo) {
-        ambilDariApi(repo, token || undefined);
-      } else {
-        simpanData(MOCK);
-        renderDaftar(MOCK);
-      }
+      ambilDariApi();
     }
 
     var _jurnalData = [];
