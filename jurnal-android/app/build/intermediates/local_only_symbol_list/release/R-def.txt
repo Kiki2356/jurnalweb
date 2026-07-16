@@ -1,0 +1,8 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_launcher_foreground
+id widget_preview
+id widget_tulis
+layout widget_layout
+string app_name
+xml widget_info

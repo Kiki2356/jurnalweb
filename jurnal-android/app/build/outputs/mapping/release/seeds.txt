@@ -1,0 +1,479 @@
+androidx.versionedparcelable.CustomVersionedParcelable
+androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
+androidx.emoji2.text.EmojiCompatInitializer
+androidx.glance.appwidget.action.ActionCallbackBroadcastReceiver
+androidx.glance.session.SessionWorker
+androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
+androidx.work.Worker
+androidx.work.impl.background.systemalarm.RescheduleReceiver
+androidx.profileinstaller.ProfileInstallerInitializer
+androidx.core.app.RemoteActionCompatParcelizer
+androidx.work.impl.workers.CombineContinuationsWorker
+androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
+androidx.core.app.CoreComponentFactory
+androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
+androidx.work.impl.workers.ConstraintTrackingWorker
+androidx.core.graphics.drawable.IconCompat
+androidx.work.impl.foreground.SystemForegroundService
+androidx.work.impl.diagnostics.DiagnosticsReceiver
+androidx.glance.appwidget.action.InvisibleActionTrampolineActivity
+androidx.glance.appwidget.action.ActionTrampolineActivity
+androidx.work.ListenableWorker
+androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
+androidx.work.WorkManagerInitializer
+androidx.work.impl.WorkDatabase
+androidx.work.CoroutineWorker
+androidx.work.WorkerParameters
+androidx.core.graphics.drawable.IconCompatParcelizer
+androidx.work.impl.WorkDatabase_Impl
+androidx.glance.appwidget.GlanceRemoteViewsService
+androidx.work.impl.background.systemjob.SystemJobService
+kotlin.coroutines.jvm.internal.BaseContinuationImpl
+androidx.profileinstaller.ProfileInstallReceiver
+android.support.v4.app.RemoteActionCompatParcelizer
+kotlinx.coroutines.internal.StackTraceRecoveryKt
+androidx.core.app.RemoteActionCompat
+androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
+androidx.annotation.Keep
+androidx.room.MultiInstanceInvalidationService
+androidx.work.OverwritingInputMerger
+androidx.versionedparcelable.ParcelImpl
+androidx.glance.appwidget.MyPackageReplacedReceiver
+androidx.work.impl.background.systemalarm.SystemAlarmService
+androidx.work.impl.workers.DiagnosticsWorker
+androidx.startup.InitializationProvider
+android.support.v4.graphics.drawable.IconCompatParcelizer
+androidx.core.widget.RemoteViewsCompatService
+androidx.work.ArrayCreatingInputMerger
+kotlinx.coroutines.android.AndroidDispatcherFactory
+androidx.lifecycle.ProcessLifecycleInitializer
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: int memoizedSerializedSize
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int IMAGE_SCALE_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int identity_
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: androidx.glance.appwidget.protobuf.Internal$ProtobufList children_
+kotlinx.coroutines.CompletedExceptionally: int _handled
+kotlinx.coroutines.scheduling.CoroutineScheduler: int _isTerminated
+kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _removedRef
+androidx.datastore.preferences.PreferencesProto$Value: int DOUBLE_FIELD_NUMBER
+kotlinx.coroutines.sync.SemaphoreImpl: long enqIdx
+kotlinx.coroutines.channels.BufferedChannel: long bufferEnd
+kotlinx.coroutines.CancellableContinuationImpl: java.lang.Object _parentHandle
+androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.PreferencesProto$StringSet DEFAULT_INSTANCE
+kotlinx.coroutines.android.HandlerContext: kotlinx.coroutines.android.HandlerContext _immediate
+androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.protobuf.Internal$ProtobufList strings_
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: int UNINITIALIZED_SERIALIZED_SIZE
+androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.futures.AbstractResolvableFuture$Waiter waiters
+androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition: androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition DEFAULT_INSTANCE
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: androidx.lifecycle.ProcessLifecycleOwner this$0
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int HEIGHT_FIELD_NUMBER
+androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.futures.AbstractResolvableFuture$Listener listeners
+androidx.glance.appwidget.proto.LayoutProto$LayoutConfig: int NEXT_INDEX_FIELD_NUMBER
+androidx.concurrent.futures.AbstractResolvableFuture: java.lang.Object value
+kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _next
+androidx.datastore.preferences.PreferencesProto$Value: androidx.datastore.preferences.PreferencesProto$Value DEFAULT_INSTANCE
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_STOP
+androidx.versionedparcelable.ParcelImpl: android.os.Parcelable$Creator CREATOR
+kotlinx.coroutines.internal.ResizableAtomicArray: java.util.concurrent.atomic.AtomicReferenceArray array
+kotlinx.coroutines.channels.BufferedChannel: long sendersAndCloseStatus
+kotlinx.coroutines.scheduling.CoroutineScheduler: long controlState
+kotlinx.coroutines.scheduling.WorkQueue: int producerIndex
+androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition: int LAYOUT_INDEX_FIELD_NUMBER
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: androidx.glance.appwidget.protobuf.UnknownFieldSetLite unknownFields
+kotlinx.coroutines.scheduling.WorkQueue: java.lang.Object lastScheduledTask
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.protobuf.MapFieldLite preferences_
+androidx.datastore.preferences.PreferencesProto$Value: int STRING_SET_FIELD_NUMBER
+kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: int indexInArray
+kotlinx.coroutines.flow.StateFlowImpl: java.lang.Object _state
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int horizontalAlignment_
+kotlinx.coroutines.InvokeOnCancelling: int _invoked
+kotlinx.coroutines.internal.LimitedDispatcher: int runningWorkers
+kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _prev
+androidx.datastore.preferences.PreferencesProto$Value: int bitField0_
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_RESUME
+androidx.glance.appwidget.proto.LayoutProto$LayoutConfig: androidx.glance.appwidget.protobuf.Parser PARSER
+kotlinx.coroutines.sync.SemaphoreImpl: java.lang.Object head
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: int MUTABLE_FLAG_MASK
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int HASACTION_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int height_
+kotlinx.coroutines.scheduling.WorkQueue: int blockingTasksInBuffer
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: int MEMOIZED_SERIALIZED_SIZE_MASK
+androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition: androidx.glance.appwidget.protobuf.Parser PARSER
+kotlinx.coroutines.DispatchedCoroutine: int _decision
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: boolean hasImageDescription_
+kotlinx.coroutines.android.HandlerDispatcherKt: android.view.Choreographer choreographer
+kotlinx.coroutines.flow.StateFlowSlot: java.lang.Object _state
+kotlinx.coroutines.EventLoopImplBase$DelayedTask: java.lang.Object _heap
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: androidx.lifecycle.ReportFragment$LifecycleCallbacks$Companion Companion
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: int memoizedSerializedSize
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: java.util.Map defaultInstanceMap
+androidx.work.impl.utils.futures.AbstractFuture: androidx.work.impl.utils.futures.AbstractFuture$Listener listeners
+kotlinx.coroutines.internal.Segment: int cleanedAndPointers
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: java.util.Map defaultInstanceMap
+androidx.datastore.preferences.PreferencesProto$Value: int LONG_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutConfig: androidx.glance.appwidget.protobuf.Internal$ProtobufList layout_
+androidx.glance.appwidget.proto.LayoutProto$LayoutConfig: int nextIndex_
+androidx.glance.appwidget.proto.LayoutProto$LayoutConfig: androidx.glance.appwidget.proto.LayoutProto$LayoutConfig DEFAULT_INSTANCE
+kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: int workerCtl
+androidx.datastore.preferences.PreferencesProto$Value: int BOOLEAN_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int HORIZONTAL_ALIGNMENT_FIELD_NUMBER
+androidx.concurrent.futures.AbstractResolvableFuture$Waiter: java.lang.Thread thread
+kotlinx.coroutines.EventLoopImplBase: int _isCompleted
+kotlinx.coroutines.UndispatchedCoroutine: boolean threadLocalIsSet
+kotlinx.coroutines.scheduling.CoroutineScheduler: long parkedWorkersStack
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.PreferencesProto$PreferenceMap DEFAULT_INSTANCE
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int WIDTH_FIELD_NUMBER
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object _closeCause
+androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition: int LAYOUT_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int HAS_IMAGE_DESCRIPTION_FIELD_NUMBER
+androidx.work.impl.utils.futures.AbstractFuture$Waiter: androidx.work.impl.utils.futures.AbstractFuture$Waiter next
+kotlinx.coroutines.android.AndroidExceptionPreHandler: java.lang.Object _preHandler
+kotlinx.coroutines.internal.LockFreeTaskQueue: java.lang.Object _cur
+kotlinx.coroutines.EventLoopImplBase: java.lang.Object _queue
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: androidx.lifecycle.ProcessLifecycleOwner this$0
+kotlinx.coroutines.JobSupport$Finishing: java.lang.Object _rootCause
+androidx.work.impl.utils.futures.AbstractFuture$Waiter: java.lang.Thread thread
+androidx.datastore.preferences.PreferencesProto$Value: java.lang.Object value_
+kotlinx.coroutines.channels.BufferedChannel: long completedExpandBuffersAndPauseFlag
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: boolean hasAction_
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: androidx.glance.appwidget.protobuf.Parser PARSER
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event[] $VALUES
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object bufferEndSegment
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_PAUSE
+androidx.work.impl.utils.futures.AbstractFuture: java.lang.Object value
+kotlinx.coroutines.CancelledContinuation: int _resumed
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int type_
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int verticalAlignment_
+androidx.datastore.preferences.PreferencesProto$Value: androidx.datastore.preferences.protobuf.Parser PARSER
+androidx.datastore.preferences.PreferencesProto$Value: int STRING_FIELD_NUMBER
+androidx.datastore.preferences.protobuf.AbstractMessageLite: int memoizedHashCode
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.protobuf.Parser PARSER
+androidx.datastore.preferences.PreferencesProto$StringSet: int STRINGS_FIELD_NUMBER
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: int PREFERENCES_FIELD_NUMBER
+kotlinx.coroutines.JobSupport: java.lang.Object _state
+androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition: int layoutIndex_
+kotlinx.coroutines.scheduling.WorkQueue: int consumerIndex
+kotlinx.coroutines.JobSupport$Finishing: int _isCompleting
+androidx.work.impl.utils.futures.AbstractFuture: androidx.work.impl.utils.futures.AbstractFuture$Waiter waiters
+androidx.datastore.preferences.PreferencesProto$Value: int valueCase_
+kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: java.lang.Object nextParkedWorker
+kotlinx.coroutines.internal.DispatchedContinuation: java.lang.Object _reusableCancellableContinuation
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_ANY
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int imageScale_
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: androidx.glance.appwidget.proto.LayoutProto$LayoutNode DEFAULT_INSTANCE
+androidx.concurrent.futures.AbstractResolvableFuture$Waiter: androidx.concurrent.futures.AbstractResolvableFuture$Waiter next
+kotlinx.coroutines.CancellableContinuationImpl: java.lang.Object _state
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event$Companion Companion
+kotlinx.coroutines.CancellableContinuationImpl: int _decisionAndIndex
+androidx.glance.appwidget.protobuf.AbstractMessageLite: int memoizedHashCode
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object receiveSegment
+kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _next
+kotlinx.coroutines.JobSupport: java.lang.Object _parentHandle
+kotlinx.coroutines.internal.LockFreeTaskQueueCore: java.lang.Object _next
+androidx.compose.runtime.ParcelableSnapshotMutableState: android.os.Parcelable$Creator CREATOR
+androidx.datastore.preferences.PreferencesProto$Value: int INTEGER_FIELD_NUMBER
+androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.protobuf.Parser PARSER
+androidx.glance.appwidget.proto.LayoutProto$LayoutConfig: int LAYOUT_FIELD_NUMBER
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_START
+kotlinx.coroutines.internal.LockFreeTaskQueueCore: long _state
+kotlinx.coroutines.sync.SemaphoreImpl: int _availablePermits
+kotlinx.coroutines.channels.BufferedChannel: long receivers
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object sendSegment
+kotlinx.coroutines.DefaultExecutor: java.lang.Thread _thread
+androidx.glance.appwidget.protobuf.GeneratedMessageLite: int UNINITIALIZED_HASH_CODE
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int TYPE_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int IDENTITY_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int CHILDREN_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int width_
+kotlinx.coroutines.DefaultExecutor: int debugStatus
+kotlinx.coroutines.EventLoopImplBase: java.lang.Object _delayed
+kotlinx.coroutines.sync.MutexImpl: java.lang.Object owner
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object closeHandler
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: androidx.datastore.preferences.protobuf.UnknownFieldSetLite unknownFields
+kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _prev
+androidx.datastore.preferences.PreferencesProto$Value: int FLOAT_FIELD_NUMBER
+androidx.glance.appwidget.proto.LayoutProto$LayoutDefinition: androidx.glance.appwidget.proto.LayoutProto$LayoutNode layout_
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_CREATE
+kotlinx.coroutines.JobSupport$Finishing: java.lang.Object _exceptionsHolder
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_DESTROY
+kotlinx.coroutines.sync.SemaphoreImpl: long deqIdx
+kotlinx.coroutines.internal.AtomicOp: java.lang.Object _consensus
+androidx.glance.appwidget.proto.LayoutProto$LayoutNode: int VERTICAL_ALIGNMENT_FIELD_NUMBER
+kotlinx.coroutines.sync.SemaphoreImpl: java.lang.Object tail
+kotlinx.coroutines.internal.ThreadSafeHeap: int _size
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setIcon(android.widget.RemoteViews,int,java.lang.String,android.graphics.drawable.Icon,android.graphics.drawable.Icon)
+androidx.profileinstaller.ProfileInstallerInitializer$Choreographer16Impl: void postFrameCallback(java.lang.Runnable)
+androidx.lifecycle.ReportFragment: ReportFragment()
+kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState: kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState[] values()
+androidx.glance.appwidget.proto.LayoutProto$LayoutType: androidx.glance.appwidget.proto.LayoutProto$LayoutType[] values()
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: void onActivityPostStarted(android.app.Activity)
+androidx.glance.appwidget.TracingApi29Impl: void endAsyncSection(java.lang.String,int)
+androidx.core.content.res.ResourcesCompat$Api23Impl: android.content.res.ColorStateList getColorStateList(android.content.res.Resources,int,android.content.res.Resources$Theme)
+androidx.lifecycle.LifecycleDispatcher$DispatcherActivityCallback: LifecycleDispatcher$DispatcherActivityCallback()
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityResumed(android.app.Activity)
+androidx.core.os.TraceCompat$Api18Impl: void beginSection(java.lang.String)
+androidx.work.OverwritingInputMerger: OverwritingInputMerger()
+androidx.core.util.ObjectsCompat$Api19Impl: int hash(java.lang.Object[])
+androidx.lifecycle.ProcessLifecycleInitializer: ProcessLifecycleInitializer()
+kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult[] values()
+androidx.glance.appwidget.RemoteViewsTranslatorApi28Impl: android.widget.RemoteViews copyRemoteViews(android.widget.RemoteViews)
+androidx.core.os.BundleApi21ImplKt: void putSizeF(android.os.Bundle,java.lang.String,android.util.SizeF)
+androidx.datastore.preferences.protobuf.FieldType$Collection: androidx.datastore.preferences.protobuf.FieldType$Collection[] values()
+androidx.work.impl.workers.CombineContinuationsWorker: CombineContinuationsWorker(android.content.Context,androidx.work.WorkerParameters)
+androidx.work.NetworkType: androidx.work.NetworkType[] values()
+androidx.profileinstaller.FileSectionType: androidx.profileinstaller.FileSectionType valueOf(java.lang.String)
+androidx.glance.appwidget.proto.LayoutProto$DimensionType: androidx.glance.appwidget.proto.LayoutProto$DimensionType[] values()
+androidx.lifecycle.ProcessLifecycleOwner$Api29Impl: void registerActivityLifecycleCallbacks(android.app.Activity,android.app.Application$ActivityLifecycleCallbacks)
+androidx.core.app.AppOpsManagerCompat$Api29Impl: android.app.AppOpsManager getSystemService(android.content.Context)
+androidx.work.impl.background.systemjob.SystemJobService: SystemJobService()
+androidx.profileinstaller.ProfileInstallReceiver: ProfileInstallReceiver()
+androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy: ConstraintProxy$NetworkStateProxy()
+kotlin.time.DurationUnit: kotlin.time.DurationUnit valueOf(java.lang.String)
+androidx.room.RoomDatabase$JournalMode: androidx.room.RoomDatabase$JournalMode valueOf(java.lang.String)
+androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke valueOf(java.lang.String)
+androidx.glance.appwidget.protobuf.FieldType: androidx.glance.appwidget.protobuf.FieldType valueOf(java.lang.String)
+androidx.glance.session.SessionWorker: SessionWorker(android.content.Context,androidx.work.WorkerParameters)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityStarted(android.app.Activity)
+androidx.datastore.preferences.protobuf.JavaType: androidx.datastore.preferences.protobuf.JavaType valueOf(java.lang.String)
+androidx.core.graphics.drawable.IconCompat$Api23Impl: android.graphics.drawable.Drawable loadDrawable(android.graphics.drawable.Icon,android.content.Context)
+androidx.work.ArrayCreatingInputMerger: ArrayCreatingInputMerger()
+kotlin.random.Random: Random()
+androidx.work.OutOfQuotaPolicy: androidx.work.OutOfQuotaPolicy valueOf(java.lang.String)
+androidx.glance.appwidget.action.StrictModeVmPolicyApi31Impl: android.os.StrictMode$VmPolicy$Builder permitUnsafeIntentLaunch(android.os.StrictMode$VmPolicy$Builder)
+androidx.work.WorkManagerInitializer: WorkManagerInitializer()
+androidx.work.impl.WorkDatabase_Impl: WorkDatabase_Impl()
+androidx.core.content.pm.PackageInfoCompat$Api28Impl: boolean hasSigningCertificate(android.content.pm.PackageManager,java.lang.String,byte[],int)
+androidx.core.app.AppOpsManagerCompat$Api23Impl: java.lang.Object getSystemService(android.content.Context,java.lang.Class)
+kotlinx.coroutines.channels.BufferOverflow: kotlinx.coroutines.channels.BufferOverflow[] values()
+androidx.core.graphics.drawable.IconCompat$Api23Impl: android.net.Uri getUri(java.lang.Object)
+kotlinx.coroutines.android.AndroidDispatcherFactory: int getLoadPriority()
+androidx.core.app.AppOpsManagerCompat$Api23Impl: java.lang.String permissionToOp(java.lang.String)
+androidx.core.graphics.drawable.IconCompat: IconCompat()
+androidx.glance.appwidget.proto.LayoutProto$VerticalAlignment: androidx.glance.appwidget.proto.LayoutProto$VerticalAlignment valueOf(java.lang.String)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityStopped(android.app.Activity)
+androidx.work.Worker: Worker(android.content.Context,androidx.work.WorkerParameters)
+androidx.emoji2.text.EmojiCompatInitializer: EmojiCompatInitializer()
+kotlinx.coroutines.android.AndroidDispatcherFactory: AndroidDispatcherFactory()
+android.support.v4.app.RemoteActionCompatParcelizer: androidx.core.app.RemoteActionCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.work.ExistingWorkPolicy: androidx.work.ExistingWorkPolicy[] values()
+androidx.core.content.ContextCompat$Api26Impl: android.content.Intent registerReceiver(android.content.Context,android.content.BroadcastReceiver,android.content.IntentFilter,java.lang.String,android.os.Handler,int)
+androidx.glance.appwidget.CollectionItemsApi31Impl: void setRemoteAdapter(android.widget.RemoteViews,int,androidx.glance.appwidget.RemoteCollectionItems)
+androidx.datastore.preferences.protobuf.ProtoSyntax: androidx.datastore.preferences.protobuf.ProtoSyntax[] values()
+androidx.glance.appwidget.action.ApplyActionApi26Impl: android.app.PendingIntent getForegroundServicePendingIntent(android.content.Context,android.content.Intent)
+androidx.glance.appwidget.GlanceRemoteViewsService: GlanceRemoteViewsService()
+androidx.work.BackoffPolicy: androidx.work.BackoffPolicy valueOf(java.lang.String)
+androidx.core.graphics.drawable.IconCompat$Api30Impl: android.graphics.drawable.Icon createWithAdaptiveBitmapContentUri(android.net.Uri)
+androidx.glance.appwidget.protobuf.WireFormat$FieldType: androidx.glance.appwidget.protobuf.WireFormat$FieldType[] values()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPreStopped(android.app.Activity)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.core.app.RemoteActionCompatParcelizer: void write(androidx.core.app.RemoteActionCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.core.content.res.FontResourcesParserCompat$Api21Impl: int getType(android.content.res.TypedArray,int)
+kotlin.coroutines.intrinsics.CoroutineSingletons: kotlin.coroutines.intrinsics.CoroutineSingletons[] values()
+kotlin.coroutines.intrinsics.CoroutineSingletons: kotlin.coroutines.intrinsics.CoroutineSingletons valueOf(java.lang.String)
+androidx.glance.appwidget.proto.LayoutProto$NodeIdentity: androidx.glance.appwidget.proto.LayoutProto$NodeIdentity[] values()
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColorAttr(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.compose.runtime.InvalidationResult: androidx.compose.runtime.InvalidationResult valueOf(java.lang.String)
+androidx.core.os.BundleApi21ImplKt: void putSize(android.os.Bundle,java.lang.String,android.util.Size)
+androidx.work.impl.background.systemalarm.RescheduleReceiver: RescheduleReceiver()
+androidx.versionedparcelable.CustomVersionedParcelable: CustomVersionedParcelable()
+androidx.datastore.preferences.PreferencesProto$Value$ValueCase: androidx.datastore.preferences.PreferencesProto$Value$ValueCase valueOf(java.lang.String)
+androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy: ConstraintProxy$StorageNotLowProxy()
+androidx.glance.appwidget.RemoteViewsTranslatorApi31Impl: void addChildView(android.widget.RemoteViews,int,android.widget.RemoteViews,int)
+androidx.profileinstaller.FileSectionType: androidx.profileinstaller.FileSectionType[] values()
+androidx.core.graphics.drawable.IconCompat$Api28Impl: int getType(java.lang.Object)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityPreCreated(android.app.Activity,android.os.Bundle)
+androidx.core.graphics.drawable.IconCompatParcelizer: void write(androidx.core.graphics.drawable.IconCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.work.CoroutineWorker: CoroutineWorker(android.content.Context,androidx.work.WorkerParameters)
+androidx.glance.appwidget.GlanceRemoteViewsServiceKt: void setRemoteAdapter(android.widget.RemoteViews,android.content.Context,int,int,java.lang.String,androidx.glance.appwidget.RemoteCollectionItems)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setCharSequence(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.glance.appwidget.action.ApplyActionApi31Impl: void unsetOnClickResponse(android.widget.RemoteViews,int)
+androidx.datastore.preferences.protobuf.FieldType: androidx.datastore.preferences.protobuf.FieldType valueOf(java.lang.String)
+androidx.glance.appwidget.proto.LayoutProto$DimensionType: androidx.glance.appwidget.proto.LayoutProto$DimensionType valueOf(java.lang.String)
+androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver: ForceStopRunnable$BroadcastReceiver()
+androidx.datastore.preferences.PreferencesProto$Value$ValueCase: androidx.datastore.preferences.PreferencesProto$Value$ValueCase[] values()
+androidx.lifecycle.Lifecycle$State: androidx.lifecycle.Lifecycle$State valueOf(java.lang.String)
+androidx.work.ExistingWorkPolicy: androidx.work.ExistingWorkPolicy valueOf(java.lang.String)
+androidx.work.BackoffPolicy: androidx.work.BackoffPolicy[] values()
+androidx.core.content.pm.PackageInfoCompat$Api28Impl: android.content.pm.Signature[] getApkContentsSigners(android.content.pm.SigningInfo)
+kotlinx.coroutines.android.AndroidDispatcherFactory: kotlinx.coroutines.MainCoroutineDispatcher createDispatcher(java.util.List)
+kotlinx.coroutines.android.AndroidExceptionPreHandler: void handleException(kotlin.coroutines.CoroutineContext,java.lang.Throwable)
+androidx.glance.appwidget.translators.ImageTranslatorApi23Impl: void setImageViewIcon(android.widget.RemoteViews,int,android.graphics.drawable.Icon)
+androidx.core.util.ObjectsCompat$Api19Impl: boolean equals(java.lang.Object,java.lang.Object)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColorStateList(android.widget.RemoteViews,int,java.lang.String,android.content.res.ColorStateList,android.content.res.ColorStateList)
+androidx.work.WorkInfo$State: androidx.work.WorkInfo$State[] values()
+androidx.compose.runtime.Recomposer$State: androidx.compose.runtime.Recomposer$State[] values()
+androidx.glance.appwidget.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.glance.appwidget.protobuf.GeneratedMessageLite$MethodToInvoke valueOf(java.lang.String)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivitySaveInstanceState(android.app.Activity,android.os.Bundle)
+androidx.glance.appwidget.protobuf.JavaType: androidx.glance.appwidget.protobuf.JavaType[] values()
+androidx.glance.appwidget.action.ApplyActionApi31Impl: void setOnCheckedChangeResponse(android.widget.RemoteViews,int,android.app.PendingIntent)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityStarted(android.app.Activity)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityStopped(android.app.Activity)
+androidx.profileinstaller.ProfileVerifier$Api33Impl: android.content.pm.PackageInfo getPackageInfo(android.content.pm.PackageManager,android.content.Context)
+androidx.work.ListenableWorker: ListenableWorker(android.content.Context,androidx.work.WorkerParameters)
+androidx.glance.appwidget.CollectionItemsApi31Impl: android.widget.RemoteViews$RemoteCollectionItems toPlatformCollectionItems(androidx.glance.appwidget.RemoteCollectionItems)
+androidx.work.DirectExecutor: androidx.work.DirectExecutor valueOf(java.lang.String)
+androidx.work.impl.workers.ConstraintTrackingWorker: ConstraintTrackingWorker(android.content.Context,androidx.work.WorkerParameters)
+androidx.work.impl.WorkDatabase: WorkDatabase()
+androidx.glance.appwidget.ApplyModifiersApi31Impl: void applyRoundedCorners(android.widget.RemoteViews,int,androidx.glance.unit.Dimension)
+androidx.core.widget.RemoteViewsCompatService: RemoteViewsCompatService()
+androidx.glance.appwidget.protobuf.FieldType$Collection: androidx.glance.appwidget.protobuf.FieldType$Collection valueOf(java.lang.String)
+android.support.v4.graphics.drawable.IconCompatParcelizer: androidx.core.graphics.drawable.IconCompat read(androidx.versionedparcelable.VersionedParcel)
+kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult valueOf(java.lang.String)
+androidx.glance.appwidget.protobuf.Writer$FieldOrder: androidx.glance.appwidget.protobuf.Writer$FieldOrder valueOf(java.lang.String)
+androidx.glance.appwidget.protobuf.JavaType: androidx.glance.appwidget.protobuf.JavaType valueOf(java.lang.String)
+androidx.core.net.ConnectivityManagerCompat$Api16Impl: boolean isActiveNetworkMetered(android.net.ConnectivityManager)
+androidx.core.app.AppOpsManagerCompat$Api23Impl: int noteProxyOpNoThrow(android.app.AppOpsManager,java.lang.String,java.lang.String)
+androidx.glance.appwidget.LayoutType: androidx.glance.appwidget.LayoutType[] values()
+androidx.glance.appwidget.LayoutType: androidx.glance.appwidget.LayoutType valueOf(java.lang.String)
+androidx.emoji2.text.ConcurrencyHelpers$Handler28Impl: android.os.Handler createAsync(android.os.Looper)
+androidx.glance.appwidget.action.InvisibleActionTrampolineActivity: InvisibleActionTrampolineActivity()
+androidx.glance.appwidget.LayoutSelectionApi31Impl: android.widget.RemoteViews remoteViews(java.lang.String,int,int)
+androidx.datastore.preferences.protobuf.FieldType: androidx.datastore.preferences.protobuf.FieldType[] values()
+androidx.core.app.RemoteActionCompatParcelizer: androidx.core.app.RemoteActionCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.core.graphics.drawable.IconCompat$Api26Impl: android.graphics.drawable.Drawable createAdaptiveIconDrawable(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setCharSequenceAttr(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.datastore.preferences.protobuf.JavaType: androidx.datastore.preferences.protobuf.JavaType[] values()
+kotlin.collections.AbstractList: AbstractList()
+androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver: ConstraintProxyUpdateReceiver()
+androidx.glance.appwidget.proto.LayoutProto$ContentScale: androidx.glance.appwidget.proto.LayoutProto$ContentScale[] values()
+androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy: ConstraintProxy$BatteryChargingProxy()
+androidx.glance.appwidget.proto.LayoutProto$HorizontalAlignment: androidx.glance.appwidget.proto.LayoutProto$HorizontalAlignment[] values()
+androidx.work.impl.utils.futures.DirectExecutor: androidx.work.impl.utils.futures.DirectExecutor[] values()
+androidx.datastore.preferences.protobuf.ProtoSyntax: androidx.datastore.preferences.protobuf.ProtoSyntax valueOf(java.lang.String)
+androidx.work.impl.background.systemalarm.SystemAlarmService: SystemAlarmService()
+androidx.core.graphics.drawable.IconCompat$Api28Impl: android.net.Uri getUri(java.lang.Object)
+androidx.core.app.RemoteActionCompatParcelizer: RemoteActionCompatParcelizer()
+androidx.room.RoomDatabase$JournalMode: androidx.room.RoomDatabase$JournalMode[] values()
+androidx.work.DirectExecutor: androidx.work.DirectExecutor[] values()
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColorStateList(android.widget.RemoteViews,int,java.lang.String,android.content.res.ColorStateList)
+androidx.core.os.BundleApi18ImplKt: void putBinder(android.os.Bundle,java.lang.String,android.os.IBinder)
+androidx.startup.InitializationProvider: InitializationProvider()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPreDestroyed(android.app.Activity)
+androidx.glance.appwidget.WidgetLayoutImpl31: androidx.glance.appwidget.proto.LayoutProto$DimensionType toProto(androidx.glance.unit.Dimension)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setBlendMode(android.widget.RemoteViews,int,java.lang.String,android.graphics.BlendMode)
+androidx.core.graphics.drawable.IconCompatParcelizer: IconCompatParcelizer()
+androidx.work.OutOfQuotaPolicy: androidx.work.OutOfQuotaPolicy[] values()
+androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke[] values()
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColorStateList(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityStopped(android.app.Activity)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColorStateListAttr(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.glance.appwidget.protobuf.Writer$FieldOrder: androidx.glance.appwidget.protobuf.Writer$FieldOrder[] values()
+androidx.glance.appwidget.LayoutSize: androidx.glance.appwidget.LayoutSize[] values()
+androidx.datastore.preferences.protobuf.WireFormat$FieldType: androidx.datastore.preferences.protobuf.WireFormat$FieldType[] values()
+androidx.datastore.preferences.protobuf.Writer$FieldOrder: androidx.datastore.preferences.protobuf.Writer$FieldOrder valueOf(java.lang.String)
+androidx.glance.appwidget.protobuf.WireFormat$JavaType: androidx.glance.appwidget.protobuf.WireFormat$JavaType[] values()
+androidx.work.impl.workers.DiagnosticsWorker: DiagnosticsWorker(android.content.Context,androidx.work.WorkerParameters)
+androidx.profileinstaller.ProfileInstallerInitializer$Handler28Impl: android.os.Handler createAsync(android.os.Looper)
+androidx.glance.session.SessionWorker: SessionWorker(android.content.Context,androidx.work.WorkerParameters,androidx.glance.session.SessionManager,androidx.glance.session.TimeoutOptions,kotlinx.coroutines.CoroutineDispatcher,int,kotlin.jvm.internal.DefaultConstructorMarker)
+androidx.room.MultiInstanceInvalidationService: MultiInstanceInvalidationService()
+androidx.glance.appwidget.GeneratedContainersForApi31Impl: java.util.Map registerChildren()
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setFloatDimenAttr(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivitySaveInstanceState(android.app.Activity,android.os.Bundle)
+android.support.v4.graphics.drawable.IconCompatParcelizer: void write(androidx.core.graphics.drawable.IconCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.core.graphics.drawable.IconCompat$Api28Impl: int getResId(java.lang.Object)
+androidx.glance.appwidget.proto.LayoutProto$HorizontalAlignment: androidx.glance.appwidget.proto.LayoutProto$HorizontalAlignment valueOf(java.lang.String)
+androidx.glance.appwidget.protobuf.FieldType$Collection: androidx.glance.appwidget.protobuf.FieldType$Collection[] values()
+androidx.core.os.BuildCompat$Api30Impl: int getExtensionVersion(int)
+androidx.glance.appwidget.action.ListAdapterTrampolineApi26Impl: void startForegroundService(android.content.Context,android.content.Intent)
+android.support.v4.graphics.drawable.IconCompatParcelizer: IconCompatParcelizer()
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event valueOf(java.lang.String)
+androidx.core.content.ContextCompat$Api26Impl: android.content.ComponentName startForegroundService(android.content.Context,android.content.Intent)
+android.support.v4.app.RemoteActionCompatParcelizer: RemoteActionCompatParcelizer()
+androidx.work.impl.diagnostics.DiagnosticsReceiver: DiagnosticsReceiver()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostStarted(android.app.Activity)
+androidx.work.NetworkType: androidx.work.NetworkType valueOf(java.lang.String)
+androidx.lifecycle.Lifecycle$State: androidx.lifecycle.Lifecycle$State[] values()
+androidx.glance.appwidget.protobuf.ProtoSyntax: androidx.glance.appwidget.protobuf.ProtoSyntax[] values()
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColorInt(android.widget.RemoteViews,int,java.lang.String,int,int)
+androidx.core.content.pm.PackageInfoCompat$Api28Impl: android.content.pm.Signature[] getSigningCertificateHistory(android.content.pm.SigningInfo)
+androidx.datastore.preferences.protobuf.WireFormat$JavaType: androidx.datastore.preferences.protobuf.WireFormat$JavaType valueOf(java.lang.String)
+androidx.glance.appwidget.ApplyModifiersApi31Impl: void setViewHeight(android.widget.RemoteViews,int,androidx.glance.unit.Dimension)
+androidx.glance.appwidget.protobuf.FieldType: androidx.glance.appwidget.protobuf.FieldType[] values()
+androidx.core.graphics.TypefaceCompatUtil$Api19Impl: android.os.ParcelFileDescriptor openFileDescriptor(android.content.ContentResolver,android.net.Uri,java.lang.String,android.os.CancellationSignal)
+androidx.glance.session.SessionWorker: SessionWorker(android.content.Context,androidx.work.WorkerParameters,androidx.glance.session.SessionManager,androidx.glance.session.TimeoutOptions,kotlinx.coroutines.CoroutineDispatcher)
+androidx.glance.appwidget.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.glance.appwidget.protobuf.GeneratedMessageLite$MethodToInvoke[] values()
+androidx.glance.appwidget.protobuf.ProtoSyntax: androidx.glance.appwidget.protobuf.ProtoSyntax valueOf(java.lang.String)
+androidx.core.provider.FontProvider$Api16Impl: android.database.Cursor query(android.content.ContentResolver,android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String,java.lang.Object)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: ReportFragment$LifecycleCallbacks()
+androidx.glance.appwidget.ApplyModifiersApi31Impl: void setViewWidth(android.widget.RemoteViews,int,androidx.glance.unit.Dimension)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostResumed(android.app.Activity)
+androidx.glance.appwidget.GeneratedContainersForApi31Impl: java.util.Map registerContainers()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostCreated(android.app.Activity,android.os.Bundle)
+androidx.datastore.preferences.protobuf.FieldType$Collection: androidx.datastore.preferences.protobuf.FieldType$Collection valueOf(java.lang.String)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityPaused(android.app.Activity)
+androidx.glance.appwidget.protobuf.WireFormat$FieldType: androidx.glance.appwidget.protobuf.WireFormat$FieldType valueOf(java.lang.String)
+androidx.glance.appwidget.proto.LayoutProto$LayoutType: androidx.glance.appwidget.proto.LayoutProto$LayoutType valueOf(java.lang.String)
+androidx.glance.appwidget.proto.LayoutProto$NodeIdentity: androidx.glance.appwidget.proto.LayoutProto$NodeIdentity valueOf(java.lang.String)
+androidx.glance.appwidget.Api31Impl: android.widget.RemoteViews createRemoteViews(java.util.Map)
+androidx.glance.appwidget.action.ActionTrampolineActivity: ActionTrampolineActivity()
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setFloatDimen(android.widget.RemoteViews,int,java.lang.String,float,int)
+androidx.work.WorkInfo$State: androidx.work.WorkInfo$State valueOf(java.lang.String)
+kotlinx.coroutines.CoroutineStart: kotlinx.coroutines.CoroutineStart[] values()
+androidx.glance.appwidget.LayoutSize: androidx.glance.appwidget.LayoutSize valueOf(java.lang.String)
+android.support.v4.app.RemoteActionCompatParcelizer: void write(androidx.core.app.RemoteActionCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.glance.appwidget.protobuf.WireFormat$JavaType: androidx.glance.appwidget.protobuf.WireFormat$JavaType valueOf(java.lang.String)
+kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState: kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState valueOf(java.lang.String)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setIntDimen(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.core.graphics.drawable.IconCompat$Api26Impl: android.graphics.drawable.Icon createWithAdaptiveBitmap(android.graphics.Bitmap)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPrePaused(android.app.Activity)
+androidx.glance.Visibility: androidx.glance.Visibility[] values()
+androidx.glance.appwidget.translators.ImageTranslatorApi31Impl: void applyTintColorFilter(androidx.glance.appwidget.TranslationContext,android.widget.RemoteViews,androidx.glance.unit.ColorProvider,int)
+androidx.core.app.RemoteActionCompat: RemoteActionCompat()
+androidx.glance.appwidget.action.ApplyActionApi31Impl: void unsetOnCheckedChangeResponse(android.widget.RemoteViews,int)
+androidx.core.content.res.ResourcesCompat$Api23Impl: int getColor(android.content.res.Resources,int,android.content.res.Resources$Theme)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.core.app.AppOpsManagerCompat$Api29Impl: java.lang.String getOpPackageName(android.content.Context)
+kotlinx.coroutines.CoroutineStart: kotlinx.coroutines.CoroutineStart valueOf(java.lang.String)
+androidx.core.app.AppOpsManagerCompat$Api23Impl: int noteProxyOp(android.app.AppOpsManager,java.lang.String,java.lang.String)
+androidx.core.graphics.drawable.IconCompatParcelizer: androidx.core.graphics.drawable.IconCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.core.os.TraceCompat$Api18Impl: void endSection()
+androidx.compose.runtime.InvalidationResult: androidx.compose.runtime.InvalidationResult[] values()
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: void onActivityPostResumed(android.app.Activity)
+androidx.work.impl.foreground.SystemForegroundService: SystemForegroundService()
+kotlin.time.DurationUnit: kotlin.time.DurationUnit[] values()
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event[] values()
+androidx.datastore.preferences.protobuf.Writer$FieldOrder: androidx.datastore.preferences.protobuf.Writer$FieldOrder[] values()
+kotlinx.coroutines.android.AndroidExceptionPreHandler: AndroidExceptionPreHandler()
+androidx.core.graphics.PaintCompat$Api23Impl: boolean hasGlyph(android.graphics.Paint,java.lang.String)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityResumed(android.app.Activity)
+androidx.core.content.pm.PackageInfoCompat$Api28Impl: boolean hasMultipleSigners(android.content.pm.SigningInfo)
+androidx.glance.appwidget.action.ActionTrampolineType: androidx.glance.appwidget.action.ActionTrampolineType valueOf(java.lang.String)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityDestroyed(android.app.Activity)
+androidx.compose.runtime.Recomposer$State: androidx.compose.runtime.Recomposer$State valueOf(java.lang.String)
+androidx.glance.appwidget.TracingApi29Impl: void beginAsyncSection(java.lang.String,int)
+kotlinx.coroutines.channels.BufferOverflow: kotlinx.coroutines.channels.BufferOverflow valueOf(java.lang.String)
+androidx.glance.appwidget.MyPackageReplacedReceiver: MyPackageReplacedReceiver()
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: ProcessLifecycleOwner$attach$1(androidx.lifecycle.ProcessLifecycleOwner)
+androidx.profileinstaller.ProfileInstallerInitializer: ProfileInstallerInitializer()
+androidx.glance.session.Api23Impl: boolean isIdle(android.os.PowerManager)
+androidx.glance.session.Api33Impl: boolean isLightIdleOrLowPowerStandby(android.os.PowerManager)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.glance.unit.ColorProviderApi23Impl: int getColor(android.content.Context,int)
+androidx.glance.appwidget.action.ApplyActionApi31Impl: void setOnCheckedChangeResponse(android.widget.RemoteViews,int,android.content.Intent)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setFloatDimen(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: ProcessLifecycleOwner$attach$1$onActivityPreCreated$1(androidx.lifecycle.ProcessLifecycleOwner)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPaused(android.app.Activity)
+androidx.glance.appwidget.action.ActionTrampolineType: androidx.glance.appwidget.action.ActionTrampolineType[] values()
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityDestroyed(android.app.Activity)
+androidx.core.app.AppOpsManagerCompat$Api29Impl: int checkOpNoThrow(android.app.AppOpsManager,java.lang.String,int,java.lang.String)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setColor(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setIntDimenAttr(android.widget.RemoteViews,int,java.lang.String,int)
+androidx.glance.appwidget.proto.LayoutProto$ContentScale: androidx.glance.appwidget.proto.LayoutProto$ContentScale valueOf(java.lang.String)
+androidx.work.impl.utils.futures.DirectExecutor: androidx.work.impl.utils.futures.DirectExecutor valueOf(java.lang.String)
+androidx.glance.appwidget.translators.TextTranslatorApi31Impl: void setTextViewGravity(android.widget.RemoteViews,int,int)
+androidx.core.graphics.drawable.IconCompat$Api23Impl: android.graphics.drawable.Icon toIcon(androidx.core.graphics.drawable.IconCompat,android.content.Context)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityPaused(android.app.Activity)
+androidx.emoji2.text.EmojiExclusions$EmojiExclusions_Api34: java.util.Set getExclusions()
+androidx.glance.appwidget.action.ActionCallbackBroadcastReceiver: ActionCallbackBroadcastReceiver()
+androidx.core.app.CoreComponentFactory: CoreComponentFactory()
+androidx.lifecycle.LifecycleDispatcher$DispatcherActivityCallback: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.core.widget.RemoteViewsCompat$Api31Impl: void setIntDimen(android.widget.RemoteViews,int,java.lang.String,float,int)
+androidx.datastore.preferences.protobuf.WireFormat$JavaType: androidx.datastore.preferences.protobuf.WireFormat$JavaType[] values()
+kotlinx.coroutines.android.AndroidDispatcherFactory: java.lang.String hintOnError()
+androidx.core.graphics.drawable.IconCompat$Api28Impl: java.lang.String getResPackage(java.lang.Object)
+androidx.core.content.pm.PackageInfoCompat$Api28Impl: long getLongVersionCode(android.content.pm.PackageInfo)
+androidx.glance.Visibility: androidx.glance.Visibility valueOf(java.lang.String)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void registerIn(android.app.Activity)
+androidx.glance.appwidget.translators.CompoundButtonApi31Impl: void setCompoundButtonChecked(android.widget.RemoteViews,int,boolean)
+androidx.datastore.preferences.protobuf.WireFormat$FieldType: androidx.datastore.preferences.protobuf.WireFormat$FieldType valueOf(java.lang.String)
+androidx.glance.appwidget.proto.LayoutProto$VerticalAlignment: androidx.glance.appwidget.proto.LayoutProto$VerticalAlignment[] values()
+androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy: ConstraintProxy$BatteryNotLowProxy()
