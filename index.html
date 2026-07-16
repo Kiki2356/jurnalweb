@@ -166,8 +166,12 @@
       var aktif = gelapAktif();
       document.querySelectorAll('article').forEach(function (a) {
         if (aktif) {
-          a.style.setProperty('background-color', '#1f2937', 'important');
-          a.style.setProperty('border-color', '#374151', 'important');
+          try {
+            a.style.setProperty('background-color', '#1f2937', 'important');
+            a.style.setProperty('border-color', '#374151', 'important');
+          } catch (e) {
+            a.style.cssText += 'background-color: #1f2937 !important; border-color: #374151 !important;';
+          }
         } else {
           a.style.removeProperty('background-color');
           a.style.removeProperty('border-color');
