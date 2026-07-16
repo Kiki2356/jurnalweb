@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tulis Jurnal</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link href="style.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen">
@@ -95,13 +97,23 @@
         <input type="hidden" id="gambar-url" value="">
       </div>
 
-      <button
-        id="btn-simpan"
-        type="submit"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg text-sm transition-colors"
-      >
-        Simpan Jurnal
-      </button>
+      <div class="flex gap-2">
+        <button
+          id="btn-simpan"
+          type="submit"
+          class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg text-sm transition-colors"
+        >
+          Simpan Jurnal
+        </button>
+        <button
+          id="btn-mic"
+          type="button"
+          class="w-12 h-[46px] flex items-center justify-center rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-100 transition-colors text-xl disabled:opacity-30 disabled:cursor-not-allowed"
+          title="Voice to text"
+          aria-label="Voice to text"
+          disabled
+        >🎤</button>
+      </div>
     </form>
 
     <div id="feedback" class="mt-4"></div>
@@ -462,6 +474,50 @@
             '<p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 text-sm">Gagal: ' + err.message + '</p>';
           console.error('Gagal simpan jurnal: ' + err.message);
         }
+      }
+
+      var btnMic = document.getElementById('btn-mic');
+      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (SpeechRecognition) {
+        btnMic.disabled = false;
+        var recognition = new SpeechRecognition();
+        recognition.lang = 'id-ID';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        btnMic.addEventListener('click', function () {
+          try {
+            recognition.start();
+            btnMic.classList.add('bg-red-100', 'border-red-400', 'text-red-600');
+            btnMic.textContent = '🔴';
+            btnMic.title = 'Merekam...';
+            feedback.innerHTML = '<p class="text-blue-600 bg-blue-50 border border-blue-200 rounded p-3 text-sm">🎤 Dengarkan... bicara sekarang.</p>';
+          } catch (e) {
+            feedback.innerHTML = '<p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 text-sm">Gagal memulai mic: ' + e.message + '</p>';
+          }
+        });
+
+        recognition.addEventListener('result', function (e) {
+          var teks = e.results[0][0].transcript;
+          isi.value += (isi.value ? ' ' : '') + teks;
+          isi.focus();
+          isi.selectionStart = isi.selectionEnd = isi.value.length;
+          feedback.innerHTML = '<p class="text-green-700 bg-green-50 border border-green-200 rounded p-3 text-sm">✅ Voice: "' + teks + '"</p>';
+        });
+
+        recognition.addEventListener('end', function () {
+          btnMic.classList.remove('bg-red-100', 'border-red-400', 'text-red-600');
+          btnMic.textContent = '🎤';
+          btnMic.title = 'Voice to text';
+        });
+
+        recognition.addEventListener('error', function (e) {
+          btnMic.classList.remove('bg-red-100', 'border-red-400', 'text-red-600');
+          btnMic.textContent = '🎤';
+          btnMic.title = 'Voice to text';
+          feedback.innerHTML = '<p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 text-sm">Mic error: ' + e.error + '</p>';
+        });
       }
 
       form.addEventListener('submit', simpanJurnal);

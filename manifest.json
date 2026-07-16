@@ -1,0 +1,16 @@
+{
+  "name": "Jurnal Pribadi",
+  "short_name": "Jurnal",
+  "description": "Buku jurnal harian pribadi — tulis, simpan, bagikan.",
+  "start_url": "tulis.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#f9fafb",
+  "background_color": "#f9fafb",
+  "categories": ["lifestyle", "writing"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
