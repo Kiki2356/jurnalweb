@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-16T18:00:00.000Z",
+  "title": "Design System: Jurnal Pribadi",
+  "extensions": {
+    "colorMeta": {
+      "surface-bg": { "role": "neutral", "displayName": "Surface Background", "canonical": "oklch(0.985 0 0)" },
+      "surface-card": { "role": "neutral", "displayName": "Card Surface", "canonical": "oklch(1 0 0)" },
+      "ink-body": { "role": "neutral", "displayName": "Body Ink", "canonical": "oklch(0.22 0 0)" },
+      "ink-muted": { "role": "neutral", "displayName": "Muted Ink", "canonical": "oklch(0.52 0 0)" },
+      "ink-content": { "role": "neutral", "displayName": "Content Ink", "canonical": "oklch(0.37 0 0)" },
+      "accent-primary": { "role": "primary", "displayName": "Accent Blue", "canonical": "oklch(0.55 0.18 265)" },
+      "dark-bg": { "role": "neutral", "displayName": "Dark Background", "canonical": "oklch(0.05 0.003 265)" },
+      "dark-card": { "role": "neutral", "displayName": "Dark Card", "canonical": "oklch(0.25 0.005 265)" },
+      "dark-ink-body": { "role": "neutral", "displayName": "Dark Body Ink", "canonical": "oklch(0.95 0 0)" }
+    }
+  },
+  "components": [
+    {
+      "name": "Journal Card",
+      "kind": "card",
+      "description": "Card jurnal di halaman index. Berisi judul, metadata, mood, musik (vinyl), gambar, dan excerpt.",
+      "html": "<article class=\"ds-card\"><h2 class=\"ds-card-title\">Belajar Menulis Jurnal</h2><div class=\"ds-card-meta\"><time>3 jam yang lalu</time><span class=\"ds-tag\">#refleksi</span></div><div class=\"ds-card-mood-music\"><span class=\"ds-mood\">\ud83d\udd25</span><div class=\"ds-vinyl\"></div><span class=\"ds-music\">Hindia - Rumah ke Rumah</span></div><div class=\"ds-card-body\">Hari ini aku mulai menulis jurnal digital. Rasanya aneh tapi menyenangkan...</div></article>",
+      "css": ".ds-card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); content-visibility: auto; } .ds-card-title { font-size: 1.125rem; font-weight: 600; line-height: 1.3; margin: 0; } .ds-card-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 0.75rem; color: #6b7280; } .ds-tag { background: #e5e7eb; color: #4b5563; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; } .ds-card-body { margin-top: 12px; font-size: 0.875rem; line-height: 1.7; color: #374151; } .ds-vinyl { width: 40px; height: 40px; border-radius: 50%; background: #1a1a2e; flex-shrink: 0; position: relative; } .ds-vinyl::before { content: ''; position: absolute; inset: 3px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.1); } .ds-card-mood-music { display: flex; align-items: center; gap: 12px; margin-top: 4px; } .ds-mood { font-size: 1.125rem; } .ds-music { font-size: 0.75rem; color: #6b7280; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "description": "Tombol aksi utama. Full width di form, inline di header.",
+      "html": "<button class=\"ds-btn-primary\">Simpan Jurnal</button>",
+      "css": ".ds-btn-primary { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 12px 16px; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background-color 0.15s; width: 100%; } .ds-btn-primary:hover { background: #1d4ed8; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "description": "Input teks standar untuk judul dan form.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Judul jurnal...\">",
+      "css": ".ds-input { width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px 16px; font-size: 0.875rem; outline: none; transition: box-shadow 0.15s; background: #fff; box-sizing: border-box; } .ds-input:focus { box-shadow: 0 0 0 2px #60a5fa; border-color: transparent; }"
+    },
+    {
+      "name": "Textarea",
+      "kind": "input",
+      "description": "Area teks untuk isi jurnal. Autofocus langsung aktif.",
+      "html": "<textarea class=\"ds-textarea\" rows=\"16\" autofocus placeholder=\"Tulis isi jurnalmu...\"></textarea>",
+      "css": ".ds-textarea { width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 12px 16px; font-size: 0.875rem; line-height: 1.7; outline: none; resize: vertical; transition: box-shadow 0.15s; background: #fff; font-family: inherit; box-sizing: border-box; } .ds-textarea:focus { box-shadow: 0 0 0 2px #60a5fa; border-color: transparent; }"
+    },
+    {
+      "name": "Tag / Chip",
+      "kind": "chip",
+      "description": "Tag topik jurnal. Muncul di metadata card.",
+      "html": "<span class=\"ds-tag\">#refleksi</span>",
+      "css": ".ds-tag { display: inline-block; background: #e5e7eb; color: #4b5563; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; line-height: 1.4; }"
+    },
+    {
+      "name": "Mood Picker",
+      "kind": "custom",
+      "description": "Pemilih emoji mood. Baris tombol emoji, klik pilih, border biru menandai aktif.",
+      "html": "<div class=\"ds-mood-picker\"><button class=\"ds-mood-btn ds-mood-active\">😊</button><button class=\"ds-mood-btn\">😌</button><button class=\"ds-mood-btn\">🥰</button><button class=\"ds-mood-btn\">😢</button><button class=\"ds-mood-btn\">😡</button><button class=\"ds-mood-btn\">😴</button><button class=\"ds-mood-btn\">🤔</button><button class=\"ds-mood-btn\">🔥</button></div>",
+      "css": ".ds-mood-picker { display: flex; gap: 8px; } .ds-mood-btn { width: 40px; height: 40px; font-size: 1.25rem; border: 1px solid #e5e7eb; border-radius: 8px; background: transparent; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; } .ds-mood-btn:hover { border-color: #60a5fa; background: #eff6ff; } .ds-mood-active { border-color: #60a5fa; background: #eff6ff; box-shadow: 0 0 0 2px #93c5fd; }"
+    },
+    {
+      "name": "Image Upload Zone",
+      "kind": "custom",
+      "description": "Drop zone upload gambar. Dashed border, preview thumbnail setelah pilih.",
+      "html": "<div class=\"ds-upload-zone\">+ Tambah gambar</div>",
+      "css": ".ds-upload-zone { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border: 2px dashed #d1d5db; border-radius: 8px; cursor: pointer; font-size: 0.875rem; color: #6b7280; transition: border-color 0.15s; } .ds-upload-zone:hover { border-color: #60a5fa; }"
+    },
+    {
+      "name": "Dark Mode Toggle",
+      "kind": "custom",
+      "description": "Tombol toggle dark mode. Berubah ikon sesuai mode aktif.",
+      "html": "<button class=\"ds-dark-toggle\">🌙</button>",
+      "css": ".ds-dark-toggle { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid #d1d5db; border-radius: 8px; background: transparent; font-size: 1.125rem; cursor: pointer; transition: background-color 0.15s; color: #6b7280; } .ds-dark-toggle:hover { background: #f3f4f6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Open Notebook",
+    "overview": "Halaman ini terasa seperti buku catatan seseorang yang sedang dipinjamkan — personal tanpa berusaha, rapi tanpa kaku. Setiap elemen ada karena tulisan butuh ruang, bukan karena tren desain. Warna terang netral di siang hari, bergeser ke gelap di malam hari. Card putih dengan bayangan ringan, tipografi sistem, aksen biru hanya di tombol dan link. Sistem ini menolak estetika AI-made dan menerima ketidaksempurnaan serta variasi mood.",
+    "keyCharacteristics": [
+      "Minimalis yang memberi napas pada konten",
+      "Dua mode (terang/gelap) untuk dua suasana",
+      "Elemen personal: mood emoji, vinyl cover berputar, gambar terpasang",
+      "Zero-friction untuk penulis (autofocus, auto-title, form langsung ngetik)"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Biru (#2563eb) hanya dipakai di tombol utama dan link. Tidak di border, tidak di dekorasi. Kelangkaannya yang membuatnya berarti.", "section": "colors" },
+      { "name": "The Gray Shift Rule", "body": "Abu-abu di mode gelap jangan turun ke suhu kebiruan atau keunguan. Tetaplah di gray-700/800/950 murni.", "section": "colors" },
+      { "name": "The System Stack Rule", "body": "Tidak ada font kustom. Tidak ada @font-face, tidak ada FOIT, tidak ada layout shift dari font swap.", "section": "typography" },
+      { "name": "The Flat Rule", "body": "Tidak ada card terangkat lebih dari satu level. Tidak ada card di dalam card. Satu layer shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Biarkan konten jadi fokus utama. Warna, spacing, dan tipografi hanyalah pendukung.",
+      "Gunakan mode gelap sebagai fitur aksesibilitas malam hari — toggle harus mudah dijangkau.",
+      "Pertahankan jarak baris longgar (1.7) untuk body text.",
+      "Tampilkan mood emoji dan cover album — ini yang membuat jurnal terasa personal."
+    ],
+    "donts": [
+      "Jangan tambahkan elemen dekoratif yang tidak punya fungsi — tidak ada gradient text, glassmorphism, side-stripe borders.",
+      "Jangan gunakan lebih dari satu aksen warna. Biru accent adalah satu-satunya warna jenuh.",
+      "Jangan tampilkan hero-metric, numbered sections, atau eyebrow headers. Jurnal bukan landing page.",
+      "Jangan bikin card yang terlihat AI-generated — terlalu rapi, terlalu simetris, tanpa kepribadian.",
+      "Jangan gunakan border-left atau border-right sebagai accent dekoratif.",
+      "Jangan optimize untuk engagement metrics. Jurnal ini untuk katarsis dan koneksi.",
+      "Jangan gunakan shadow di mode gelap — tonal layering saja."
+    ]
+  }
+}
