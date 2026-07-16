@@ -168,7 +168,7 @@
         if (!q) { hasilCari.classList.add('hidden'); return; }
         timerCari = setTimeout(function () {
           try {
-            fetch('https://api.deezer.com/search?q=' + encodeURIComponent(q))
+            fetch('/.netlify/functions/deezer?q=' + encodeURIComponent(q))
               .then(function (r) { return r.json(); })
               .then(function (res) {
                 if (!res.data || !res.data.length) {
