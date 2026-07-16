@@ -9,7 +9,10 @@
 <body class="bg-gray-50 text-gray-900 min-h-screen">
 
   <main class="max-w-2xl mx-auto pt-12 pb-24 px-4">
-    <h1 class="text-2xl font-bold tracking-tight mb-6">Tulis Jurnal Baru</h1>
+    <h1 class="text-2xl font-bold tracking-tight mb-1">Tulis Jurnal Baru</h1>
+    <p class="text-sm text-gray-400 mb-6">
+      <button id="btn-ganti-konfig" type="button" class="underline hover:text-gray-600">Ganti konfigurasi</button>
+    </p>
 
     <form id="form-jurnal" class="space-y-4">
       <div>
@@ -47,30 +50,121 @@
     <div id="feedback" class="mt-4"></div>
   </main>
 
+  <div id="modal-konfig" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6">
+      <h2 class="text-lg font-semibold mb-4">Konfigurasi GitHub</h2>
+      <p class="text-sm text-gray-500 mb-4">Masukkan token dan repo untuk mulai menyimpan jurnal.</p>
+      <form id="form-konfig" class="space-y-3">
+        <div>
+          <label for="gh-token" class="block text-sm font-medium text-gray-600 mb-1">Personal Access Token</label>
+          <input id="gh-token" type="password" class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" placeholder="ghp_..." required>
+        </div>
+        <div>
+          <label for="gh-repo" class="block text-sm font-medium text-gray-600 mb-1">Repository <span class="text-gray-400 font-normal">(format: username/nama-repo)</span></label>
+          <input id="gh-repo" type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" placeholder="user-anda/nama-repo" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-sm transition-colors">Simpan Konfigurasi</button>
+      </form>
+      <p id="modal-error" class="text-red-600 text-sm mt-3 hidden"></p>
+    </div>
+  </div>
+
   <script>
     (function () {
       var form = document.getElementById('form-jurnal');
       var judul = document.getElementById('judul');
       var isi = document.getElementById('isi');
       var feedback = document.getElementById('feedback');
+      var modal = document.getElementById('modal-konfig');
+      var formKonfig = document.getElementById('form-konfig');
+      var inpToken = document.getElementById('gh-token');
+      var inpRepo = document.getElementById('gh-repo');
+      var modalError = document.getElementById('modal-error');
+      var btnGanti = document.getElementById('btn-ganti-konfig');
+
+      var STORAGE_TOKEN = 'jurnal_gh_token';
+      var STORAGE_REPO = 'jurnal_gh_repo';
+
+      function konfigAda() {
+        return !!(localStorage.getItem(STORAGE_TOKEN) && localStorage.getItem(STORAGE_REPO));
+      }
+
+      function tampilkanModal() {
+        inpToken.value = localStorage.getItem(STORAGE_TOKEN) || '';
+        inpRepo.value = localStorage.getItem(STORAGE_REPO) || '';
+        modalError.classList.add('hidden');
+        modal.classList.remove('hidden');
+        inpToken.focus();
+      }
+
+      function sembunyikanModal() {
+        modal.classList.add('hidden');
+      }
+
+      if (!konfigAda()) {
+        tampilkanModal();
+      }
+
+      btnGanti.addEventListener('click', function () {
+        tampilkanModal();
+      });
+
+      formKonfig.addEventListener('submit', function (e) {
+        e.preventDefault();
+        try {
+          var token = inpToken.value.trim();
+          var repo = inpRepo.value.trim();
+
+          if (!token || !repo) {
+            modalError.textContent = 'Token dan repo wajib diisi.';
+            modalError.classList.remove('hidden');
+            return;
+          }
+
+          if (repo.indexOf('/') === -1) {
+            modalError.textContent = 'Format repo harus username/nama-repo (contoh: alice/catatanku).';
+            modalError.classList.remove('hidden');
+            return;
+          }
+
+          localStorage.setItem(STORAGE_TOKEN, token);
+          localStorage.setItem(STORAGE_REPO, repo);
+          sembunyikanModal();
+        } catch (err) {
+          modalError.textContent = 'Gagal: ' + err.message;
+          modalError.classList.remove('hidden');
+        }
+      });
 
       function ambilLimaKata(teks) {
         return teks.trim().split(/\s+/).slice(0, 5).join(' ');
       }
 
-      function keSlug(teks) {
-        return teks
-          .toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, '');
+      function pad(n) {
+        return n < 10 ? '0' + n : '' + n;
+      }
+
+      function namaFile() {
+        var d = new Date();
+        return d.getFullYear() + '-' +
+          pad(d.getMonth() + 1) + '-' +
+          pad(d.getDate()) + '-' +
+          pad(d.getHours()) +
+          pad(d.getMinutes()) +
+          pad(d.getSeconds()) + '.md';
       }
 
       function simpanJurnal(e) {
         e.preventDefault();
 
         try {
+          if (!konfigAda()) {
+            tampilkanModal();
+            feedback.innerHTML =
+              '<p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 text-sm">Konfigurasi GitHub belum diisi. Silakan isi token dan repo terlebih dahulu.</p>';
+            return;
+          }
+
           var isiMentah = isi.value.trim();
           if (!isiMentah) {
             feedback.innerHTML =
@@ -78,28 +172,65 @@
             return;
           }
 
+          var token = localStorage.getItem(STORAGE_TOKEN);
+          var repo = localStorage.getItem(STORAGE_REPO);
           var judulFinal = judul.value.trim() || ambilLimaKata(isiMentah);
           var sekarang = new Date();
           var tanggalIso = sekarang.toISOString();
-          var id = tanggalIso.slice(0, 10) + '-' + keSlug(judulFinal);
 
           var md =
             '---\n' +
-            'id: ' + id + '\n' +
             'title: "' + judulFinal + '"\n' +
             'date: ' + tanggalIso + '\n' +
             'tags: []\n' +
             '---\n\n' +
             isiMentah;
 
-          console.log(md);
+          var fileNama = namaFile();
+          var kontenB64 = btoa(unescape(encodeURIComponent(md)));
 
-          feedback.innerHTML =
-            '<p class="text-green-700 bg-green-50 border border-green-200 rounded p-3 text-sm">Jurnal berhasil diformat. Lihat <code>console.log</code> (F12).</p>';
+          var btn = document.getElementById('btn-simpan');
+          btn.disabled = true;
+          btn.textContent = 'Menyimpan...';
 
-          judul.value = '';
-          isi.value = '';
-          isi.focus();
+          fetch('https://api.github.com/repos/' + repo + '/contents/journals/' + fileNama, {
+            method: 'PUT',
+            headers: {
+              'Authorization': 'token ' + token,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: 'jurnal: ' + judulFinal,
+              content: kontenB64,
+              branch: 'main'
+            })
+          })
+          .then(function (res) {
+            if (!res.ok) {
+              return res.json().then(function (data) {
+                throw new Error(data.message || 'HTTP ' + res.status);
+              });
+            }
+            return res.json();
+          })
+          .then(function () {
+            feedback.innerHTML =
+              '<p class="text-green-700 bg-green-50 border border-green-200 rounded p-3 text-sm">Jurnal tersimpan ke GitHub: <code>' + fileNama + '</code></p>';
+
+            judul.value = '';
+            isi.value = '';
+            isi.focus();
+          })
+          .catch(function (err) {
+            feedback.innerHTML =
+              '<p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 text-sm">Gagal menyimpan: ' + err.message + '</p>';
+            console.error('GitHub API gagal: ' + err.message);
+          })
+          .finally(function () {
+            btn.disabled = false;
+            btn.textContent = 'Simpan Jurnal';
+          });
+
         } catch (err) {
           feedback.innerHTML =
             '<p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 text-sm">Gagal: ' + err.message + '</p>';
