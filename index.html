@@ -4,12 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jurnal Pribadi</title>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     article { content-visibility: auto; }
+    .dark, .dark body { background-color: #030712; color: #f3f4f6; }
+    body { transition: background-color 0.2s, color 0.2s; }
+    .dark .bg-white { background-color: #1f2937 !important; }
+    .dark .border-gray-200, .dark .border-gray-300 { border-color: #374151 !important; }
+    .dark .text-gray-500 { color: #9ca3af !important; }
+    .dark .text-gray-700 { color: #d1d5db !important; }
+    .dark .text-gray-400 { color: #6b7280 !important; }
+    .dark .bg-gray-200 { background-color: #374151 !important; }
+    .dark .text-gray-600 { color: #d1d5db !important; }
+    .dark .text-blue-600 { color: #60a5fa !important; }
+    .dark .hover\:text-blue-800:hover { color: #93bbfd !important; }
+    .dark .hover\:bg-gray-100:hover { background-color: #1f2937 !important; }
+    .dark .border-gray-300 { border-color: #4b5563 !important; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     .vinyl {
       width: 48px; height: 48px;
@@ -46,7 +56,7 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-200">
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen">
 
   <header class="max-w-2xl mx-auto pt-12 pb-6 px-4">
     <div class="flex items-center justify-between">
