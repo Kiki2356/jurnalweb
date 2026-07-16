@@ -86,10 +86,16 @@
 
       <div>
         <label class="block text-sm font-medium text-gray-600 mb-1">Gambar <span class="text-gray-400 font-normal">(opsional)</span></label>
-        <label class="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 text-sm text-gray-500">
-          <span id="label-gambar">+ Tambah gambar</span>
-          <input id="input-gambar" type="file" accept="image/*" class="sr-only">
-        </label>
+        <div class="flex gap-2">
+          <label class="flex-1 flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 text-sm text-gray-500">
+            <span id="label-gambar">+ Galeri</span>
+            <input id="input-gambar" type="file" accept="image/*" class="sr-only">
+          </label>
+          <label class="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 text-sm text-gray-500">
+            <span>📷 Kamera</span>
+            <input id="input-kamera" type="file" accept="image/*" capture="environment" class="sr-only">
+          </label>
+        </div>
         <div id="preview-gambar" class="hidden mt-2 relative">
           <img id="img-preview" class="max-h-48 rounded-lg object-cover" alt="">
           <button id="hapus-gambar" type="button" class="absolute top-1 right-1 bg-white/90 text-gray-600 hover:text-red-500 rounded-full w-6 h-6 flex items-center justify-center text-sm shadow">&times;</button>
@@ -160,6 +166,7 @@
       var previewTeks = document.getElementById('preview-teks');
       var btnHapusLagu = document.getElementById('hapus-lagu');
       var inputGambar = document.getElementById('input-gambar');
+      var inputKamera = document.getElementById('input-kamera');
       var previewGambar = document.getElementById('preview-gambar');
       var imgPreview = document.getElementById('img-preview');
       var hapusGambar = document.getElementById('hapus-gambar');
@@ -201,29 +208,35 @@
 
       btnHapusLagu.addEventListener('click', resetLagu);
 
-      inputGambar.addEventListener('change', function () {
-        var file = this.files[0];
-        if (!file) return;
-        try {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            imgPreview.src = e.target.result;
-            previewGambar.classList.remove('hidden');
-            labelGambar.textContent = file.name;
-            gambarUrl.value = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        } catch (err) {
-          console.error('Gagal baca gambar:', err);
-        }
-      });
+      function bacaFile(fileInput) {
+        return function () {
+          var file = fileInput.files[0];
+          if (!file) return;
+          try {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              imgPreview.src = e.target.result;
+              previewGambar.classList.remove('hidden');
+              labelGambar.textContent = file.name;
+              gambarUrl.value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          } catch (err) {
+            console.error('Gagal baca gambar:', err);
+          }
+        };
+      }
+
+      inputGambar.addEventListener('change', bacaFile(inputGambar));
+      inputKamera.addEventListener('change', bacaFile(inputKamera));
 
       hapusGambar.addEventListener('click', function () {
         inputGambar.value = '';
+        inputKamera.value = '';
         previewGambar.classList.add('hidden');
         imgPreview.src = '';
         gambarUrl.value = '';
-        labelGambar.textContent = '+ Tambah gambar';
+        labelGambar.textContent = '+ Galeri';
       });
 
       inpCariLagu.addEventListener('input', function () {
@@ -384,8 +397,9 @@
             inpMood.value = '';
             gambarUrl.value = '';
             inputGambar.value = '';
+            inputKamera.value = '';
             previewGambar.classList.add('hidden');
-            labelGambar.textContent = '+ Tambah gambar';
+            labelGambar.textContent = '+ Galeri';
             resetLagu();
             moodAktif = '';
             document.querySelectorAll('.mood-btn').forEach(function (b) { b.classList.remove('border-blue-400', 'bg-blue-50', 'ring-2', 'ring-blue-300'); });
