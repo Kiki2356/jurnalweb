@@ -2,3 +2,7 @@
 *.log
 .env
 node_modules/
+jurnal-android/build
+jurnal-android/app/build
+jurnal-android/.gradle
+jurnal-android/local.properties
