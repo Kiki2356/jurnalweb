@@ -22,6 +22,8 @@ colors:
   dark-ink-tag: "#d1d5db"
   dark-border-card: "#374151"
   dark-accent-link: "#60a5fa"
+  vinyl-bg: "#1a1a2e"
+  vinyl-fallback: "#333333"
 typography:
   title:
     fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif"
@@ -121,6 +123,8 @@ Palet ini diambil dari utilitas Tailwind default — tidak ada warna kustom. Aks
 - **Accent Blue** (#2563eb, blue-600): Tombol utama dan link.
 - **Tag Background** (#e5e7eb, gray-200): Chip tag.
 - **Card Border** (#e5e7eb, gray-200): Garis tipis card.
+- **Vinyl Background** (#1a1a2e): Warna vinyl record. Biru gelap navy.
+- **Vinyl Cover Fallback** (#333333): Fallback cover saat tidak ada gambar album.
 
 ### Dark Mode
 
