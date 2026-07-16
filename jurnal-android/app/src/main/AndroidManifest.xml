@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.jurnal.ui.WriteWidgetActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.DialogWhenLarge"
+            android:excludeFromRecents="true" />
+
         <receiver
             android:name="com.jurnal.widget.JournalWidgetReceiver"
             android:exported="true">

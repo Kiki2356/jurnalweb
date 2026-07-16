@@ -1,11 +1,19 @@
 [
     {
+        "merged": "com.jurnal.app-merged_res-54:/layout_widget_layout.xml.flat",
+        "source": "com.jurnal.app-main-56:/layout/widget_layout.xml"
+    },
+    {
+        "merged": "com.jurnal.app-merged_res-54:/xml_widget_info.xml.flat",
+        "source": "com.jurnal.app-main-56:/xml/widget_info.xml"
+    },
+    {
         "merged": "/home/dhash/.gradle/daemon/8.5/com.jurnal.app-merged_res-54:/layout_widget_layout.xml.flat",
         "source": "/home/dhash/.gradle/daemon/8.5/com.jurnal.app-main-56:/layout/widget_layout.xml"
     },
     {
-        "merged": "com.jurnal.app-merged_res-54:/xml_file_paths.xml.flat",
-        "source": "com.jurnal.app-main-56:/xml/file_paths.xml"
+        "merged": "/home/dhash/.gradle/daemon/8.5/com.jurnal.app-merged_res-54:/xml_file_paths.xml.flat",
+        "source": "/home/dhash/.gradle/daemon/8.5/com.jurnal.app-main-56:/xml/file_paths.xml"
     },
     {
         "merged": "/home/dhash/.gradle/daemon/8.5/com.jurnal.app-merged_res-54:/xml_widget_info.xml.flat",

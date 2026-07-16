@@ -45,6 +45,11 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.jurnal.ui.WriteWidgetActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault.DialogWhenLarge" />
 
         <receiver
             android:name="com.jurnal.widget.JournalWidgetReceiver"

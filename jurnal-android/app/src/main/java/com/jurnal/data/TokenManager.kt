@@ -13,13 +13,21 @@ class TokenManager(context: Context) {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
+    private val widgetPrefs = context.getSharedPreferences("jurnal_widget", Context.MODE_PRIVATE)
+
     var token: String
         get() = prefs.getString("gh_token", "") ?: ""
-        set(value) = prefs.edit().putString("gh_token", value).apply()
+        set(value) {
+            prefs.edit().putString("gh_token", value).apply()
+            widgetPrefs.edit().putString("gh_token", value).apply()
+        }
 
     var repo: String
         get() = prefs.getString("gh_repo", "") ?: ""
-        set(value) = prefs.edit().putString("gh_repo", value).apply()
+        set(value) {
+            prefs.edit().putString("gh_repo", value).apply()
+            widgetPrefs.edit().putString("gh_repo", value).apply()
+        }
 
     val isConfigured: Boolean get() = token.isNotBlank() && repo.isNotBlank()
 }
