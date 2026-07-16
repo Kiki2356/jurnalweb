@@ -28,28 +28,10 @@
       el.textContent = new Date().getFullYear();
     })();
 
-    var journals = [
-      {
-        id: '2026-07-16-belajar',
-        title: 'Belajar Menulis Jurnal',
-        date: '2026-07-16T14:30:00+07:00',
-        tags: ['refleksi', 'mulai'],
-        content: 'Hari ini aku mulai menulis jurnal digital. Rasanya aneh tapi menyenangkan. Semoga bisa konsisten mengisi tiap hari dengan catatan-catatan kecil yang bermakna. Bismillah.'
-      },
-      {
-        id: '2026-07-15-hujan',
-        title: 'Hujan Sore Ini',
-        date: '2026-07-15T17:00:00+07:00',
-        tags: ['harian', 'cuaca'],
-        content: 'Hujan turun deras sore tadi. Aku duduk di teras sambil ngopi. Suara rintik hujan selalu bikin pikiran lebih tenang. Momen-momen kecil seperti ini yang ingin aku simpan.'
-      },
-      {
-        id: '2026-07-14-kopi',
-        title: 'Kopi Pagi dan Ide Baru',
-        date: '2026-07-14T08:15:00+07:00',
-        tags: ['ide', 'pagi'],
-        content: 'Pagi ini dapat ide proyek baru sambil nyeruput kopi tubruk. Kayaknya menarik buat dikerjain akhir pekan nanti. Catat dulu biar nggak lupa.'
-      }
+    var MOCK = [
+      { title: 'Belajar Menulis Jurnal', date: '2026-07-16T14:30:00+07:00', tags: ['refleksi', 'mulai'], content: 'Hari ini aku mulai menulis jurnal digital. Rasanya aneh tapi menyenangkan. Semoga bisa konsisten mengisi tiap hari dengan catatan-catatan kecil yang bermakna. Bismillah.' },
+      { title: 'Hujan Sore Ini', date: '2026-07-15T17:00:00+07:00', tags: ['harian', 'cuaca'], content: 'Hujan turun deras sore tadi. Aku duduk di teras sambil ngopi. Suara rintik hujan selalu bikin pikiran lebih tenang. Momen-momen kecil seperti ini yang ingin aku simpan.' },
+      { title: 'Kopi Pagi dan Ide Baru', date: '2026-07-14T08:15:00+07:00', tags: ['ide', 'pagi'], content: 'Pagi ini dapat ide proyek baru sambil nyeruput kopi tubruk. Kayaknya menarik buat dikerjain akhir pekan nanti. Catat dulu biar nggak lupa.' }
     ];
 
     function relatifWaktu(dateStr) {
@@ -71,20 +53,53 @@
       }
     }
 
-    function muatJurnal() {
+    function b64KeUtf8(b64) {
+      return decodeURIComponent(escape(atob(b64)));
+    }
+
+    function parseFrontmatter(raw) {
+      var result = { title: 'Tanpa Judul', date: new Date().toISOString(), tags: [], content: raw };
+      try {
+        var match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+        if (!match) return result;
+        var header = match[1];
+        var body = match[2];
+        var lines = header.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          if (!line) continue;
+          var kv = line.split(/:\s*(.+)/);
+          var key = kv[0].trim();
+          var val = (kv[1] || '').trim();
+          if (key === 'title') {
+            result.title = val.replace(/^["']|["']$/g, '');
+          } else if (key === 'date') {
+            result.date = val.replace(/^["']|["']$/g, '');
+          } else if (key === 'tags') {
+            try { result.tags = JSON.parse(val); } catch (e) { result.tags = []; }
+          }
+        }
+        result.content = body.trim();
+      } catch (e) {
+        /* ponytail: fall through to raw content */
+      }
+      return result;
+    }
+
+    function renderDaftar(data) {
       var wadah = document.getElementById('journal-list');
 
       try {
-        journals.sort(function (a, b) {
+        data.sort(function (a, b) {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
 
         var html = '';
-        journals.forEach(function (j) {
+        data.forEach(function (j) {
           var excerpt = j.content.length > 120
             ? j.content.slice(0, 120) + '...'
             : j.content;
-          var tagsHtml = j.tags.map(function (t) {
+          var tagsHtml = (j.tags || []).map(function (t) {
             return '<span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">#' + t + '</span>';
           }).join(' ');
 
@@ -93,20 +108,65 @@
               '<h2 class="text-lg font-semibold leading-snug">' + j.title + '</h2>' +
               '<div class="flex items-center gap-2 mt-1 text-sm text-gray-500">' +
                 '<time datetime="' + j.date + '">' + relatifWaktu(j.date) + '</time>' +
-                '<span>&middot;</span>' +
-                tagsHtml +
+                (tagsHtml ? '<span>&middot;</span>' + tagsHtml : '') +
               '</div>' +
               '<p class="mt-3 text-gray-700 leading-relaxed">' + excerpt + '</p>' +
             '</article>';
         });
 
-        wadah.innerHTML = html;
+        wadah.innerHTML = html || '<p class="text-gray-400 text-center py-12">Belum ada jurnal. Mulai dari <a href="tulis.html" class="underline text-blue-500">tulis.html</a>.</p>';
       } catch (e) {
-        wadah.innerHTML =
-          '<p class="text-red-500 bg-red-50 border border-red-200 rounded p-4">' +
-            'Gagal memuat jurnal: ' + e.message +
-          '</p>';
-        console.error('Gagal memuat jurnal: ' + e.message);
+        console.error('Gagal render: ' + e.message);
+      }
+    }
+
+    function ambilDariApi(repo, token) {
+      var headers = token ? { 'Authorization': 'token ' + token } : {};
+      var url = 'https://api.github.com/repos/' + repo + '/contents/journals/';
+
+      fetch(url, { headers: headers })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Gagal membaca direktori journals (HTTP ' + res.status + ')');
+          return res.json();
+        })
+        .then(function (files) {
+          if (!Array.isArray(files) || files.length === 0) {
+            renderDaftar([]);
+            return;
+          }
+
+          var mdFiles = files.filter(function (f) { return f.name.endsWith('.md'); });
+          var promises = mdFiles.map(function (f) {
+            return fetch(f.url, { headers: headers })
+              .then(function (r) {
+                if (!r.ok) throw new Error('Gagal mengambil ' + f.name);
+                return r.json();
+              })
+              .then(function (content) {
+                var raw = b64KeUtf8(content.content);
+                return parseFrontmatter(raw);
+              });
+          });
+
+          return Promise.all(promises);
+        })
+        .then(function (data) {
+          if (data) renderDaftar(data);
+        })
+        .catch(function (err) {
+          console.error('API gagal, fallback ke data lokal: ' + err.message);
+          renderDaftar(MOCK);
+        });
+    }
+
+    function muatJurnal() {
+      var repo = localStorage.getItem('jurnal_gh_repo');
+      var token = localStorage.getItem('jurnal_gh_token');
+
+      if (repo) {
+        ambilDariApi(repo, token || undefined);
+      } else {
+        renderDaftar(MOCK);
       }
     }
 
