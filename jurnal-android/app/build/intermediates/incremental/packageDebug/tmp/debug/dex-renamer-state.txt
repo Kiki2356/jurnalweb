@@ -1,4 +1,4 @@
-#Thu Jul 16 14:37:00 WIB 2026
+#Thu Jul 16 14:42:51 WIB 2026
 base.0=/home/dhash/webjurnal/jurnal-android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/home/dhash/webjurnal/jurnal-android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.2=/home/dhash/webjurnal/jurnal-android/app/build/intermediates/dex/debug/mergeProjectDexDebug/12/classes.dex

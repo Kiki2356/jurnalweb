@@ -97,30 +97,78 @@ fun JournalList(journals: List<Journal>, modifier: Modifier = Modifier) {
 
     LazyColumn(modifier = modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 8.dp)) {
         groups.forEach { (dateKey, entries) ->
-            item(key = "header_$dateKey") {
-                DayHeader(dateKey, entries.size)
-            }
-            items(entries, key = { it.title + it.date }) { journal ->
-                JournalCard(journal)
+            item(key = "day_$dateKey") {
+                DayGroup(dateKey, entries)
             }
         }
     }
 }
 
 @Composable
-fun DayHeader(dateKey: String, count: Int) {
+fun DayGroup(dateKey: String, entries: List<Journal>) {
+    var expanded by remember { mutableStateOf(false) }
+
     val parts = dateKey.split("-")
     val bulanIndo = listOf("Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des")
     val niceDate = "${parts[2].toInt()} ${bulanIndo[parts[1].toInt() - 1]} ${parts[0]}"
 
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp, horizontal = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
-        Text(niceDate, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Spacer(Modifier.width(8.dp))
-        Text("· $count", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f))
-        HorizontalDivider(modifier = Modifier.padding(start = 8.dp), color = MaterialTheme.colorScheme.outlineVariant)
+        Column {
+            // Clickable header
+            Row(
+                modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded }.padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(if (expanded) "▼" else "▶", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Spacer(Modifier.width(10.dp))
+                Text(niceDate, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
+                Spacer(Modifier.width(6.dp))
+                Text("· ${entries.size}", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+
+            // Preview (when collapsed)
+            if (!expanded) {
+                val last = entries.first()
+                var prevText = last.content.take(80)
+                if (last.content.length > 80) prevText += "..."
+                Text(
+                    text = prevText,
+                    fontSize = 13.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(start = 46.dp, end = 16.dp, bottom = 4.dp)
+                )
+                if (last.mood.isNotBlank() && last.mood != "-" || last.music.isNotBlank() && last.music != "-") {
+                    Row(
+                        modifier = Modifier.padding(start = 46.dp, end = 16.dp, bottom = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (last.mood.isNotBlank() && last.mood != "-") Text(last.mood, fontSize = 14.sp)
+                        if (last.music.isNotBlank() && last.music != "-") {
+                            if (last.mood.isNotBlank() && last.mood != "-") Spacer(Modifier.width(6.dp))
+                            Text("♫ ${last.music}", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        }
+                    }
+                } else {
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
+
+            // Entries (when expanded)
+            AnimatedVisibility(visible = expanded) {
+                Column(modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp)) {
+                    entries.forEach { journal ->
+                        JournalCard(journal)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -173,7 +221,7 @@ fun JournalCard(journal: Journal) {
             if (truncated) {
                 TextButton(
                     onClick = { expanded = !expanded },
-                    modifier = Modifier.padding(top = 2.dp, start = -12.dp)
+                    modifier = Modifier.padding(top = 2.dp)
                 ) {
                     Text(if (expanded) "Ringkas" else "Baca selengkapnya", fontSize = 13.sp)
                 }
