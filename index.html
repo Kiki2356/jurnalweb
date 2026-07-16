@@ -232,17 +232,27 @@
             return '<button type="button" class="tag-filter text-xs bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" data-tag="' + t + '">#' + t + '</button>';
           }).join(' ');
 
-          var moodShow = j.mood && j.mood !== '-' ? '<span class="text-lg" title="Mood">' + j.mood + '</span>' : '';
-          var musikShow = '';
+          var moodEmo = j.mood && j.mood !== '-' ? j.mood : '';
+          var moodMusikBlok = '';
           if (j.music && j.music !== '-') {
-            var coverHtml = '';
-            if (j.album_art && j.album_art !== '-') {
-              coverHtml = '<div class="vinyl"><div class="vinyl-cover" style="background-image:url(' + j.album_art.replace(/"/g, '&quot;') + ')"></div><div class="vinyl-hole"></div></div>';
-            }
-            musikShow = coverHtml + '<span class="text-xs text-gray-500 dark:text-gray-400 truncate">' + j.music + '</span>';
-          }
-          if (moodShow || musikShow) {
-            ekstra = '<div class="flex items-center gap-3 mt-1">' + moodShow + musikShow + '</div>';
+            var coverSrc = (j.album_art && j.album_art !== '-') ? j.album_art : '';
+            var coverStyle = coverSrc
+              ? 'style="background-image:url(' + coverSrc.replace(/"/g, '&quot;') + ');background-size:cover;background-position:center"'
+              : '';
+            var coverHtml = coverSrc
+              ? '<div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex-shrink-0 bg-cover bg-center" ' + coverStyle + '></div>'
+              : '<div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex-shrink-0 flex items-center justify-center text-gray-400 dark:text-gray-500 text-lg">♫</div>';
+
+            moodMusikBlok =
+              '<div class="mt-4 bg-gray-50 dark:bg-gray-700 rounded-lg p-3 flex items-center gap-3">' +
+                coverHtml +
+                '<div class="flex-1 min-w-0">' +
+                  '<p class="text-sm font-medium truncate text-gray-900 dark:text-gray-100">' + j.music + '</p>' +
+                  (moodEmo ? '<p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">' + moodEmo + '</p>' : '') +
+                '</div>' +
+              '</div>';
+          } else if (moodEmo) {
+            moodMusikBlok = '<div class="mt-4 text-lg">' + moodEmo + '</div>';
           }
 
           var adaGambar = j.image && j.image !== '-';
@@ -261,10 +271,7 @@
                 '<p class="excerpt text-pretty">' + excerpt + '</p>' +
                 (truncated ? '<p class="full hidden">' + j.content + '</p>' : '') +
               '</div>' +
-              (moodShow || musikShow ? '<div class="mt-4 flex items-center justify-between gap-3">' + 
-                '<span class="flex items-center gap-3">' + musikShow + '</span>' +
-                '<span>' + moodShow + '</span>' +
-              '</div>' : '') +
+              moodMusikBlok +
               (truncated ? '<button type="button" class="read-more text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm mt-2">Baca selengkapnya</button>' : '') +
             '</article>';
           });
