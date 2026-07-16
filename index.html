@@ -7,18 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     article { content-visibility: auto; }
-    body { transition: background-color 0.2s, color 0.2s; }
-    body.dark { background-color: #030712 !important; color: #f3f4f6 !important; }
-    body.dark .bg-white { background-color: #1f2937 !important; }
-    body.dark .border-gray-200, body.dark .border-gray-300 { border-color: #374151 !important; }
-    body.dark .text-gray-500 { color: #9ca3af !important; }
-    body.dark .text-gray-700 { color: #d1d5db !important; }
-    body.dark .text-gray-400 { color: #6b7280 !important; }
-    body.dark .bg-gray-200 { background-color: #374151 !important; }
-    body.dark .text-gray-600 { color: #d1d5db !important; }
-    body.dark .text-blue-600 { color: #60a5fa !important; }
-    body.dark .hover\:text-blue-800:hover { color: #93bbfd !important; }
-    body.dark .hover\:bg-gray-100:hover { background-color: #1f2937 !important; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     .vinyl {
       width: 48px; height: 48px;
@@ -264,21 +252,40 @@
     muatJurnal();
 
     (function () {
-      var body = document.body;
       var btn = document.getElementById('btn-dark');
       var simpan = localStorage.getItem('jurnal_dark');
+      var gaya = document.createElement('style');
+      gaya.id = 'gaya-dark';
+      gaya.textContent =
+        'body{background-color:#030712!important;color:#f3f4f6!important;transition:background-color .2s,color .2s}' +
+        '.bg-white{background-color:#1f2937!important}' +
+        '.border-gray-200,.border-gray-300{border-color:#374151!important}' +
+        '.text-gray-500{color:#9ca3af!important}' +
+        '.text-gray-700{color:#d1d5db!important}' +
+        '.text-gray-400{color:#6b7280!important}' +
+        '.bg-gray-200{background-color:#374151!important}' +
+        '.text-gray-600{color:#d1d5db!important}' +
+        '.text-blue-600{color:#60a5fa!important}' +
+        '.hover\\:text-blue-800:hover{color:#93bbfd!important}' +
+        '.hover\\:bg-gray-100:hover{background-color:#1f2937!important}';
 
-      if (simpan === 'true') {
-        body.classList.add('dark');
-        btn.textContent = '☀️';
-        btn.title = 'Mode terang';
+      function terapkan(aktif) {
+        if (aktif) {
+          document.head.appendChild(gaya);
+          btn.textContent = '☀️'; btn.title = 'Mode terang';
+        } else {
+          if (gaya.parentNode) gaya.parentNode.removeChild(gaya);
+          btn.textContent = '🌙'; btn.title = 'Mode gelap';
+        }
       }
 
+      if (simpan === 'true') terapkan(true);
+
       btn.addEventListener('click', function () {
-        var isDark = body.classList.toggle('dark');
-        localStorage.setItem('jurnal_dark', isDark);
-        btn.textContent = isDark ? '☀️' : '🌙';
-        btn.title = isDark ? 'Mode terang' : 'Mode gelap';
+        var gelap = simpan !== 'true';
+        localStorage.setItem('jurnal_dark', gelap);
+        simpan = gelap ? 'true' : 'false';
+        terapkan(gelap);
       });
     })();
 
