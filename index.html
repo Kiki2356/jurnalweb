@@ -5,6 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jurnal Pribadi</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes vinyl-spin { to { transform: rotate(360deg); } }
+    .vinyl {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      position: relative;
+      flex-shrink: 0;
+      animation: vinyl-spin 4s linear infinite;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .vinyl::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255,255,255,0.08);
+    }
+    .vinyl-cover {
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-color: #333;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .vinyl-hole {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #f0f0f0;
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen">
 
@@ -58,7 +94,7 @@
     }
 
     function parseFrontmatter(raw) {
-      var result = { title: 'Tanpa Judul', date: new Date().toISOString(), tags: [], mood: '', music: '', content: raw };
+      var result = { title: 'Tanpa Judul', date: new Date().toISOString(), tags: [], mood: '', music: '', album_art: '', content: raw };
       try {
         var match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
         if (!match) return result;
@@ -81,6 +117,8 @@
             result.mood = val.replace(/^["']|["']$/g, '');
           } else if (key === 'music') {
             result.music = val.replace(/^["']|["']$/g, '');
+          } else if (key === 'album_art') {
+            result.album_art = val.replace(/^["']|["']$/g, '');
           }
         }
         result.content = body.trim();
@@ -108,9 +146,22 @@
           }).join(' ');
 
           var moodHtml = j.mood && j.mood !== '-' ? '<span class="text-lg" title="Mood">' + j.mood + '</span>' : '';
-          var musikHtml = j.music && j.music !== '-' ? '<span class="text-xs text-gray-400">&#9835; ' + j.music + '</span>' : '';
-          var ekstra = moodHtml || musikHtml
-            ? '<div class="flex items-center gap-2 mt-1">' + moodHtml + musikHtml + '</div>'
+
+          var musikBlok = '';
+          if (j.music && j.music !== '-') {
+            var coverHtml = '';
+            if (j.album_art && j.album_art !== '-') {
+              coverHtml = '<div class="vinyl"><div class="vinyl-cover" style="background-image:url(' + j.album_art.replace(/"/g, '&quot;') + ')"></div><div class="vinyl-hole"></div></div>';
+            }
+            musikBlok =
+              '<div class="flex items-center gap-3 mt-1">' +
+                coverHtml +
+                '<span class="text-xs text-gray-500 truncate">' + j.music + '</span>' +
+              '</div>';
+          }
+
+          var ekstra = moodHtml || musikBlok
+            ? '<div class="flex items-center gap-2 mt-1">' + moodHtml + '</div>' + musikBlok
             : '';
 
           html +=

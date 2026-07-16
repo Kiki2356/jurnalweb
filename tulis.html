@@ -54,13 +54,24 @@
       </div>
 
       <div>
-        <label for="lagu" class="block text-sm font-medium text-gray-600 mb-1">Musik <span class="text-gray-400 font-normal">(opsional — lagu yang sedang didengar)</span></label>
-        <input
-          id="lagu"
-          type="text"
-          class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-          placeholder="Judul Lagu - Artis"
-        >
+        <label for="cari-lagu" class="block text-sm font-medium text-gray-600 mb-1">Musik <span class="text-gray-400 font-normal">(opsional — cari lagu)</span></label>
+        <div class="relative">
+          <input
+            id="cari-lagu"
+            type="text"
+            autocomplete="off"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            placeholder="Cari lagu atau artis..."
+          >
+          <div id="hasil-cari" class="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden max-h-60 overflow-y-auto"></div>
+        </div>
+        <input type="hidden" id="lagu" value="">
+        <input type="hidden" id="album-art" value="">
+        <div id="lagu-terpilih" class="hidden mt-2 flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2 text-sm">
+          <span id="preview-cover" class="w-10 h-10 rounded-full bg-gray-300 bg-cover bg-center flex-shrink-0"></span>
+          <span id="preview-teks" class="text-gray-700 truncate"></span>
+          <button id="hapus-lagu" type="button" class="ml-auto text-gray-400 hover:text-red-500 text-lg leading-none">&times;</button>
+        </div>
       </div>
 
       <button
@@ -108,8 +119,16 @@
       var btnGanti = document.getElementById('btn-ganti-konfig');
       var inpMood = document.getElementById('mood');
       var inpLagu = document.getElementById('lagu');
+      var inpAlbumArt = document.getElementById('album-art');
+      var inpCariLagu = document.getElementById('cari-lagu');
+      var hasilCari = document.getElementById('hasil-cari');
+      var laguTerpilih = document.getElementById('lagu-terpilih');
+      var previewCover = document.getElementById('preview-cover');
+      var previewTeks = document.getElementById('preview-teks');
+      var btnHapusLagu = document.getElementById('hapus-lagu');
 
       var moodAktif = '';
+      var timerCari = null;
 
       document.querySelectorAll('.mood-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -120,6 +139,71 @@
           moodAktif = btn.dataset.mood;
           inpMood.value = moodAktif;
         });
+      });
+
+      function pilihLagu(data) {
+        inpLagu.value = data.artist.name + ' - ' + data.title;
+        inpAlbumArt.value = data.album.cover_medium;
+        previewTeks.textContent = data.artist.name + ' - ' + data.title;
+        previewCover.style.backgroundImage = 'url(' + data.album.cover_small + ')';
+        laguTerpilih.classList.remove('hidden');
+        hasilCari.classList.add('hidden');
+        inpCariLagu.value = data.artist.name + ' - ' + data.title;
+      }
+
+      function resetLagu() {
+        inpLagu.value = '';
+        inpAlbumArt.value = '';
+        inpCariLagu.value = '';
+        laguTerpilih.classList.add('hidden');
+        previewCover.style.backgroundImage = '';
+        previewTeks.textContent = '';
+      }
+
+      btnHapusLagu.addEventListener('click', resetLagu);
+
+      inpCariLagu.addEventListener('input', function () {
+        clearTimeout(timerCari);
+        var q = this.value.trim();
+        if (!q) { hasilCari.classList.add('hidden'); return; }
+        timerCari = setTimeout(function () {
+          try {
+            fetch('https://api.deezer.com/search?q=' + encodeURIComponent(q))
+              .then(function (r) { return r.json(); })
+              .then(function (res) {
+                if (!res.data || !res.data.length) {
+                  hasilCari.innerHTML = '<p class="px-3 py-2 text-sm text-gray-400">Tidak ditemukan</p>';
+                  hasilCari.classList.remove('hidden');
+                  return;
+                }
+                var html = '';
+                res.data.slice(0, 6).forEach(function (item) {
+                  html +=
+                    '<button type="button" class="w-full flex items-center gap-3 px-3 py-2 hover:bg-blue-50 text-left text-sm border-b border-gray-100 last:border-0">' +
+                      '<img src="' + item.album.cover_small + '" class="w-10 h-10 rounded object-cover" alt="" loading="lazy">' +
+                      '<div class="truncate">' +
+                        '<span class="font-medium text-gray-800 block truncate">' + item.title + '</span>' +
+                        '<span class="text-xs text-gray-500">' + item.artist.name + '</span>' +
+                      '</div>' +
+                    '</button>';
+                });
+                hasilCari.innerHTML = html;
+                hasilCari.classList.remove('hidden');
+
+                hasilCari.querySelectorAll('button').forEach(function (btn, i) {
+                  btn.addEventListener('click', function () { pilihLagu(res.data[i]); });
+                });
+              });
+          } catch (e) {
+            console.error('Search gagal:', e);
+          }
+        }, 300);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!hasilCari.contains(e.target) && e.target !== inpCariLagu) {
+          hasilCari.classList.add('hidden');
+        }
       });
 
       var STORAGE_TOKEN = 'jurnal_gh_token';
@@ -225,6 +309,7 @@
             'tags: []\n' +
             'mood: "' + (inpMood.value || '-') + '"\n' +
             'music: "' + (inpLagu.value.trim() || '-') + '"\n' +
+            'album_art: "' + (inpAlbumArt.value.trim() || '-') + '"\n' +
             '---\n\n' +
             isiMentah;
 
@@ -261,8 +346,8 @@
 
             judul.value = '';
             isi.value = '';
-            inpLagu.value = '';
             inpMood.value = '';
+            resetLagu();
             moodAktif = '';
             document.querySelectorAll('.mood-btn').forEach(function (b) {
               b.classList.remove('border-blue-400', 'bg-blue-50', 'ring-2', 'ring-blue-300');
