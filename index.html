@@ -6,22 +6,22 @@
   <title>Jurnal Pribadi</title>
   <script>
     if (localStorage.getItem('jurnal_dark') === 'true') {
-      document.documentElement.style.setProperty('--is-dark', '1');
+      document.documentElement.classList.add('dark');
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     article { content-visibility: auto; }
     body { transition: background-color 0.2s, color 0.2s; }
-    body.dark { background-color: #030712 !important; color: #f3f4f6 !important; }
-    body.dark .text-gray-500 { color: #9ca3af !important; }
-    body.dark .text-gray-700 { color: #d1d5db !important; }
-    body.dark .text-gray-400 { color: #6b7280 !important; }
-    body.dark .bg-gray-200 { background-color: #374151 !important; }
-    body.dark .text-gray-600 { color: #d1d5db !important; }
-    body.dark .text-blue-600 { color: #60a5fa !important; }
-    body.dark .hover\:text-blue-800:hover { color: #93bbfd !important; }
-    body.dark .hover\:bg-gray-100:hover { background-color: #1f2937 !important; }
+    html.dark body { background-color: #030712 !important; color: #f3f4f6 !important; }
+    html.dark .text-gray-500 { color: #9ca3af !important; }
+    html.dark .text-gray-700 { color: #d1d5db !important; }
+    html.dark .text-gray-400 { color: #6b7280 !important; }
+    html.dark .bg-gray-200 { background-color: #374151 !important; }
+    html.dark .text-gray-600 { color: #d1d5db !important; }
+    html.dark .text-blue-600 { color: #60a5fa !important; }
+    html.dark .hover\:text-blue-800:hover { color: #93bbfd !important; }
+    html.dark .hover\:bg-gray-100:hover { background-color: #1f2937 !important; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     .vinyl {
       width: 48px; height: 48px;
@@ -84,7 +84,7 @@
 
   <script>
     if (localStorage.getItem('jurnal_dark') === 'true') {
-      document.body.classList.add('dark');
+      document.documentElement.classList.add('dark');
     }
 
     (function () {
@@ -163,10 +163,15 @@
     }
 
     function segarkanArtikel() {
-      if (!gelapAktif()) return;
+      var aktif = gelapAktif();
       document.querySelectorAll('article').forEach(function (a) {
-        a.style.setProperty('background-color', '#1f2937', 'important');
-        a.style.setProperty('border-color', '#374151', 'important');
+        if (aktif) {
+          a.style.setProperty('background-color', '#1f2937', 'important');
+          a.style.setProperty('border-color', '#374151', 'important');
+        } else {
+          a.style.removeProperty('background-color');
+          a.style.removeProperty('border-color');
+        }
       });
     }
 
@@ -284,21 +289,18 @@
     muatJurnal();
 
     (function () {
+      var html = document.documentElement;
       var btn = document.getElementById('btn-dark');
 
       if (gelapAktif()) {
-        document.body.classList.add('dark');
+        html.classList.add('dark');
         btn.textContent = '☀️'; btn.title = 'Mode terang';
       }
 
       btn.addEventListener('click', function () {
         var aktif = !gelapAktif();
         localStorage.setItem('jurnal_dark', aktif);
-        if (aktif) {
-          document.body.classList.add('dark');
-        } else {
-          document.body.classList.remove('dark');
-        }
+        html.classList.toggle('dark', aktif);
         btn.textContent = aktif ? '☀️' : '🌙';
         btn.title = aktif ? 'Mode terang' : 'Mode gelap';
         segarkanArtikel();
