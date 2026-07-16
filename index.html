@@ -196,22 +196,19 @@
 
           var moodHtml = j.mood && j.mood !== '-' ? '<span class="text-lg" title="Mood">' + j.mood + '</span>' : '';
 
-          var musikBlok = '';
+          var ekstra = '';
+          var moodShow = moodHtml;
+          var musikShow = '';
           if (j.music && j.music !== '-') {
             var coverHtml = '';
             if (j.album_art && j.album_art !== '-') {
               coverHtml = '<div class="vinyl"><div class="vinyl-cover" style="background-image:url(' + j.album_art.replace(/"/g, '&quot;') + ')"></div><div class="vinyl-hole"></div></div>';
             }
-            musikBlok =
-              '<div class="flex items-center gap-3 mt-1">' +
-                coverHtml +
-                '<span class="text-xs text-gray-500 dark:text-gray-400 truncate">' + j.music + '</span>' +
-              '</div>';
+            musikShow = coverHtml + '<span class="text-xs text-gray-500 dark:text-gray-400 truncate">' + j.music + '</span>';
           }
-
-          var ekstra = moodHtml || musikBlok
-            ? '<div class="flex items-center gap-2 mt-1">' + moodHtml + '</div>' + musikBlok
-            : '';
+          if (moodShow || musikShow) {
+            ekstra = '<div class="flex items-center gap-3 mt-1">' + moodShow + musikShow + '</div>';
+          }
 
           var gambarHtml = j.image && j.image !== '-' ? '<img src="' + j.image + '" class="w-full max-h-64 object-cover rounded-lg mb-3" loading="lazy">' : '';
 
