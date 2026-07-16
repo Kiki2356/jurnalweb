@@ -243,12 +243,15 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
                         if (q.length >= 2) {
                             musicLoading = true
                             scope.launch {
-                                try {
-                                    val url = java.net.URL("https://jurnalweb.netlify.app/.netlify/functions/deezer?q=" + java.net.URLEncoder.encode(q, "utf-8"))
-                                    val json = url.readText()
-                                    val results = com.google.gson.Gson().fromJson(json, MusicResponse::class.java)
-                                    musicResults = results.data.take(6)
-                                } catch (e: Exception) { musicResults = emptyList() }
+                                val results = withContext(Dispatchers.IO) {
+                                    try {
+                                        val url = java.net.URL("https://jurnalweb.netlify.app/.netlify/functions/deezer?q=" + java.net.URLEncoder.encode(q, "utf-8"))
+                                        val json = url.readText()
+                                        val resp = com.google.gson.Gson().fromJson(json, MusicResponse::class.java)
+                                        resp.data.take(6)
+                                    } catch (e: Exception) { emptyList() }
+                                }
+                                musicResults = results
                                 musicLoading = false
                             }
                         } else { musicResults = emptyList() }
