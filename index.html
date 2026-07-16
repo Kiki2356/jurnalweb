@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jurnal Pribadi</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>">
   <script>
     if (localStorage.getItem('jurnal_dark') === 'true') {
       document.documentElement.classList.add('dark');
@@ -23,6 +24,7 @@
     html.dark .read-more { color: #60a5fa !important; }
     body { transition: background-color 0.2s, color 0.2s; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .vinyl { animation: none; } }
     .vinyl {
       width: 48px; height: 48px;
       border-radius: 50%;
@@ -64,10 +66,10 @@
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">Jurnal Pribadi</h1>
-        <p class="text-gray-500 mt-1">Catatan harian, sederhana.</p>
+        <p class="text-gray-500 mt-1">Catatan harian, sederhana <span class="text-gray-400">— oleh Kiki</span></p>
       </div>
       <div class="flex items-center gap-2">
-        <button id="btn-dark" type="button" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-100 transition-colors text-lg" title="Mode gelap">🌙</button>
+        <button id="btn-dark" type="button" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-100 transition-colors text-lg" aria-label="Mode gelap" title="Mode gelap">🌙</button>
         <a href="tulis.html" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">+ Tulis Baru</a>
       </div>
     </div>
@@ -78,7 +80,7 @@
     </div>
   </main>
 
-  <footer class="max-w-2xl mx-auto px-4 pb-8 text-center text-sm text-gray-400">
+  <footer class="max-w-2xl mx-auto px-4 pb-8 text-center text-sm text-gray-500">
     <p>dibuat dengan teks biasa &mdash; <span id="current-year"></span></p>
   </footer>
 
@@ -175,7 +177,7 @@
           var truncated = j.content.length > 120;
           var excerpt = truncated ? j.content.slice(0, 120) + '...' : j.content;
           var tagsHtml = (j.tags || []).map(function (t) {
-            return '<span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">#' + t + '</span>';
+            return '<button type="button" class="tag-filter text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded hover:bg-blue-100 transition-colors" data-tag="' + t + '">#' + t + '</button>';
           }).join(' ');
 
           var moodHtml = j.mood && j.mood !== '-' ? '<span class="text-lg" title="Mood">' + j.mood + '</span>' : '';
@@ -216,7 +218,14 @@
             '</article>';
         });
 
-        wadah.innerHTML = html || '<p class="text-gray-400 text-center py-12">Belum ada jurnal. Mulai dari <a href="tulis.html" class="underline text-blue-500">tulis.html</a>.</p>';
+        var tagBar = _tagAktif
+          ? '<div class="flex items-center gap-2 text-sm text-gray-500 mb-4">' +
+              'Filter: <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">#' + _tagAktif + '</span>' +
+              '<button type="button" class="text-gray-400 hover:text-gray-600 underline text-xs" id="hapus-filter">Hapus filter</button>' +
+            '</div>'
+          : '';
+
+        wadah.innerHTML = tagBar + html || tagBar + '<p class="text-gray-400 text-center py-12">Belum ada jurnal. Mulai dari <a href="tulis.html" class="underline text-blue-500">tulis.html</a>.</p>';
       } catch (e) {
         console.error('Gagal render: ' + e.message);
       }
@@ -253,10 +262,14 @@
           return Promise.all(promises);
         })
         .then(function (data) {
-          if (data) renderDaftar(data);
+          if (data) {
+            simpanData(data);
+            renderDaftar(data);
+          }
         })
         .catch(function (err) {
           console.error('API gagal, fallback ke data lokal: ' + err.message);
+          simpanData(MOCK);
           renderDaftar(MOCK);
         });
     }
@@ -264,11 +277,36 @@
     function muatJurnal() {
       var repo = localStorage.getItem('jurnal_gh_repo');
       var token = localStorage.getItem('jurnal_gh_token');
+      var wadah = document.getElementById('journal-list');
+      wadah.innerHTML =
+        '<div class="animate-pulse space-y-6">' +
+          '<div class="bg-white border border-gray-200 rounded-lg p-5"><div class="h-4 bg-gray-200 rounded w-3/4 mb-3"></div><div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div><div class="h-3 bg-gray-200 rounded w-full mb-2"></div><div class="h-3 bg-gray-200 rounded w-5/6"></div></div>' +
+          '<div class="bg-white border border-gray-200 rounded-lg p-5"><div class="h-4 bg-gray-200 rounded w-3/4 mb-3"></div><div class="h-3 bg-gray-200 rounded w-1/4 mb-3"></div><div class="h-3 bg-gray-200 rounded w-full mb-2"></div><div class="h-3 bg-gray-200 rounded w-5/6"></div></div>' +
+        '</div>';
 
       if (repo) {
         ambilDariApi(repo, token || undefined);
       } else {
+        simpanData(MOCK);
         renderDaftar(MOCK);
+      }
+    }
+
+    var _jurnalData = [];
+    var _tagAktif = '';
+
+    function simpanData(data) {
+      _jurnalData = data;
+    }
+
+    function filterByTag(tag) {
+      _tagAktif = _tagAktif === tag ? '' : tag;
+      if (_tagAktif) {
+        renderDaftar(_jurnalData.filter(function (j) {
+          return j.tags && j.tags.indexOf(_tagAktif) !== -1;
+        }));
+      } else {
+        renderDaftar(_jurnalData);
       }
     }
 
@@ -281,6 +319,7 @@
       if (gelapAktif()) {
         html.classList.add('dark');
         btn.textContent = '☀️'; btn.title = 'Mode terang';
+        btn.setAttribute('aria-label', 'Mode terang');
       }
 
       btn.addEventListener('click', function () {
@@ -289,16 +328,29 @@
         html.classList.toggle('dark', aktif);
         btn.textContent = aktif ? '☀️' : '🌙';
         btn.title = aktif ? 'Mode terang' : 'Mode gelap';
+        btn.setAttribute('aria-label', aktif ? 'Mode terang' : 'Mode gelap');
       });
     })();
 
     document.getElementById('journal-list').addEventListener('click', function (e) {
+      var tagBtn = e.target.closest('.tag-filter');
+      if (tagBtn) {
+        filterByTag(tagBtn.dataset.tag);
+        return;
+      }
+
+      if (e.target.id === 'hapus-filter') {
+        filterByTag(_tagAktif);
+        return;
+      }
+
       var btn = e.target.closest('.read-more');
       if (!btn) return;
       var article = btn.closest('article');
       var excerpt = article.querySelector('.excerpt');
       var full = article.querySelector('.full');
-      if (full.classList.contains('hidden')) {
+      var expanding = full.classList.contains('hidden');
+      if (expanding) {
         excerpt.classList.add('hidden');
         full.classList.remove('hidden');
         btn.textContent = 'Ringkas';
@@ -307,6 +359,7 @@
         excerpt.classList.remove('hidden');
         btn.textContent = 'Baca selengkapnya';
       }
+      btn.setAttribute('aria-expanded', String(expanding));
     });
   </script>
 
