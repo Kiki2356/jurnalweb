@@ -2,7 +2,7 @@
   "name": "Jurnal Pribadi",
   "short_name": "Jurnal",
   "description": "Buku jurnal harian pribadi — tulis, simpan, bagikan.",
-  "start_url": "tulis.html",
+  "start_url": "index.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
