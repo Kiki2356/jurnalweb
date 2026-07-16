@@ -50,6 +50,7 @@ class JournalRepository(private val token: String, private val repo: String) {
                 appendLine("tags: []")
                 appendLine("mood: \"${journal.mood}\"")
                 appendLine("music: \"${journal.music}\"")
+                appendLine("album_art: \"${journal.albumArt}\"")
                 appendLine("image: \"$imageUrl\"")
                 appendLine("---")
                 appendLine()

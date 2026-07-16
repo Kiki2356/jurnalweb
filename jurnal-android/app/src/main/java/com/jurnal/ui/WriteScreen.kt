@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
@@ -201,13 +202,107 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
 
             Spacer(Modifier.height(16.dp))
 
-            OutlinedTextField(
-                value = music,
-                onValueChange = { music = it },
-                label = { Text("Musik (opsional — Judul - Artis)") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true
-            )
+            // Music search
+            var musicSearch by remember { mutableStateOf("") }
+            var musicResults by remember { mutableStateOf<List<TrackResult>>(emptyList()) }
+            var musicLoading by remember { mutableStateOf(false) }
+            var musicSelected by remember { mutableStateOf(false) }
+            var albumArtUrl by remember { mutableStateOf("") }
+
+            Text("Musik", fontWeight = FontWeight.Medium, fontSize = 14.sp)
+            Spacer(Modifier.height(8.dp))
+
+            if (musicSelected) {
+                // Show selected music with cover
+                Row(
+                    modifier = Modifier.fillMaxWidth().clickable { musicSelected = false; musicSearch = "" }
+                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+                        .padding(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (albumArtUrl.isNotBlank()) {
+                        Image(
+                            painter = rememberAsyncImagePainter(albumArtUrl),
+                            contentDescription = "Cover",
+                            modifier = Modifier.size(40.dp).clip(RoundedCornerShape(4.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        Box(Modifier.size(40.dp).background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(4.dp)),
+                            contentAlignment = Alignment.Center) { Text("♫", fontSize = 18.sp) }
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Text(music, modifier = Modifier.weight(1f), fontSize = 13.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text("✕", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            } else {
+                OutlinedTextField(
+                    value = musicSearch,
+                    onValueChange = { q ->
+                        musicSearch = q
+                        if (q.length >= 2) {
+                            musicLoading = true
+                            scope.launch {
+                                try {
+                                    val url = java.net.URL("https://jurnalweb.netlify.app/.netlify/functions/deezer?q=" + java.net.URLEncoder.encode(q, "utf-8"))
+                                    val json = url.readText()
+                                    val results = com.google.gson.Gson().fromJson(json, MusicResponse::class.java)
+                                    musicResults = results.data.take(6)
+                                } catch (e: Exception) { musicResults = emptyList() }
+                                musicLoading = false
+                            }
+                        } else { musicResults = emptyList() }
+                    },
+                    label = { Text("Cari lagu atau artis...") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+
+                // Search results dropdown
+                if (musicResults.isNotEmpty()) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        elevation = CardDefaults.cardElevation(4.dp)
+                    ) {
+                        Column {
+                            musicResults.forEach { track ->
+                                Row(
+                                    modifier = Modifier.fillMaxWidth().clickable {
+                                        music = "${track.artist.name} - ${track.title}"
+                                        albumArtUrl = track.album.cover_medium ?: ""
+                                        musicSearch = ""
+                                        musicResults = emptyList()
+                                        musicSelected = true
+                                    }.padding(10.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    if (track.album.cover_small != null) {
+                                        Image(
+                                            painter = rememberAsyncImagePainter(track.album.cover_small),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(40.dp).clip(RoundedCornerShape(4.dp)),
+                                            contentScale = ContentScale.Crop
+                                        )
+                                    } else {
+                                        Box(Modifier.size(40.dp).background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(4.dp)),
+                                            contentAlignment = Alignment.Center) { Text("♫", fontSize = 16.sp) }
+                                    }
+                                    Spacer(Modifier.width(10.dp))
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(track.title, fontSize = 13.sp, fontWeight = FontWeight.Medium, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                                        Text(track.artist.name, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (musicLoading) {
+                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth().padding(top = 4.dp))
+                }
+            }
 
             Spacer(Modifier.height(24.dp))
 
@@ -232,12 +327,14 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
                             date = now,
                             mood = mood.ifEmpty { "-" },
                             music = music.ifBlank { "-" },
+                            albumArt = albumArtUrl,
                             content = content
                         )
                         val ok = repo.saveJournal(journal, imageBase64)
                         if (ok) {
                             message = "✅ Jurnal tersimpan!"
                             title = ""; content = ""; mood = ""; music = ""
+                            musicSearch = ""; albumArtUrl = ""; musicSelected = false
                             imageUri = null; imageBase64 = null
                         } else {
                             message = "❌ Gagal menyimpan. Cek token GitHub."
@@ -255,3 +352,16 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
         }
     }
 }
+
+// Deezer API response models
+data class MusicResponse(val data: List<TrackResult> = emptyList())
+data class TrackResult(
+    val title: String = "",
+    val artist: ArtistResult = ArtistResult(),
+    val album: AlbumResult = AlbumResult()
+)
+data class ArtistResult(val name: String = "")
+data class AlbumResult(
+    val cover_small: String? = null,
+    val cover_medium: String? = null
+)
