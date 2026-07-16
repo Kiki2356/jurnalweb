@@ -6,6 +6,7 @@
   <title>Jurnal Pribadi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    article { content-visibility: auto; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     .vinyl {
       width: 48px; height: 48px;
@@ -45,8 +46,13 @@
 <body class="bg-gray-50 text-gray-900 min-h-screen">
 
   <header class="max-w-2xl mx-auto pt-12 pb-6 px-4">
-    <h1 class="text-3xl font-bold tracking-tight">Jurnal Pribadi</h1>
-    <p class="text-gray-500 mt-1">Catatan harian, sederhana.</p>
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Jurnal Pribadi</h1>
+        <p class="text-gray-500 mt-1">Catatan harian, sederhana.</p>
+      </div>
+      <a href="tulis.html" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">+ Tulis Baru</a>
+    </div>
   </header>
 
   <main class="max-w-2xl mx-auto px-4 pb-24">
