@@ -29,9 +29,9 @@
     })();
 
     var MOCK = [
-      { title: 'Belajar Menulis Jurnal', date: '2026-07-16T14:30:00+07:00', tags: ['refleksi', 'mulai'], content: 'Hari ini aku mulai menulis jurnal digital. Rasanya aneh tapi menyenangkan. Semoga bisa konsisten mengisi tiap hari dengan catatan-catatan kecil yang bermakna. Bismillah.' },
-      { title: 'Hujan Sore Ini', date: '2026-07-15T17:00:00+07:00', tags: ['harian', 'cuaca'], content: 'Hujan turun deras sore tadi. Aku duduk di teras sambil ngopi. Suara rintik hujan selalu bikin pikiran lebih tenang. Momen-momen kecil seperti ini yang ingin aku simpan.' },
-      { title: 'Kopi Pagi dan Ide Baru', date: '2026-07-14T08:15:00+07:00', tags: ['ide', 'pagi'], content: 'Pagi ini dapat ide proyek baru sambil nyeruput kopi tubruk. Kayaknya menarik buat dikerjain akhir pekan nanti. Catat dulu biar nggak lupa.' }
+      { title: 'Belajar Menulis Jurnal', date: '2026-07-16T14:30:00+07:00', tags: ['refleksi', 'mulai'], mood: '🔥', music: 'Hindia - Rumah ke Rumah', content: 'Hari ini aku mulai menulis jurnal digital. Rasanya aneh tapi menyenangkan. Semoga bisa konsisten mengisi tiap hari dengan catatan-catatan kecil yang bermakna. Bismillah.' },
+      { title: 'Hujan Sore Ini', date: '2026-07-15T17:00:00+07:00', tags: ['harian', 'cuaca'], mood: '😌', music: '-', content: 'Hujan turun deras sore tadi. Aku duduk di teras sambil ngopi. Suara rintik hujan selalu bikin pikiran lebih tenang. Momen-momen kecil seperti ini yang ingin aku simpan.' },
+      { title: 'Kopi Pagi dan Ide Baru', date: '2026-07-14T08:15:00+07:00', tags: ['ide', 'pagi'], mood: '🤔', music: '-', content: 'Pagi ini dapat ide proyek baru sambil nyeruput kopi tubruk. Kayaknya menarik buat dikerjain akhir pekan nanti. Catat dulu biar nggak lupa.' }
     ];
 
     function relatifWaktu(dateStr) {
@@ -58,7 +58,7 @@
     }
 
     function parseFrontmatter(raw) {
-      var result = { title: 'Tanpa Judul', date: new Date().toISOString(), tags: [], content: raw };
+      var result = { title: 'Tanpa Judul', date: new Date().toISOString(), tags: [], mood: '', music: '', content: raw };
       try {
         var match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
         if (!match) return result;
@@ -77,6 +77,10 @@
             result.date = val.replace(/^["']|["']$/g, '');
           } else if (key === 'tags') {
             try { result.tags = JSON.parse(val); } catch (e) { result.tags = []; }
+          } else if (key === 'mood') {
+            result.mood = val.replace(/^["']|["']$/g, '');
+          } else if (key === 'music') {
+            result.music = val.replace(/^["']|["']$/g, '');
           }
         }
         result.content = body.trim();
@@ -103,6 +107,12 @@
             return '<span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">#' + t + '</span>';
           }).join(' ');
 
+          var moodHtml = j.mood && j.mood !== '-' ? '<span class="text-lg" title="Mood">' + j.mood + '</span>' : '';
+          var musikHtml = j.music && j.music !== '-' ? '<span class="text-xs text-gray-400">&#9835; ' + j.music + '</span>' : '';
+          var ekstra = moodHtml || musikHtml
+            ? '<div class="flex items-center gap-2 mt-1">' + moodHtml + musikHtml + '</div>'
+            : '';
+
           html +=
             '<article class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">' +
               '<h2 class="text-lg font-semibold leading-snug">' + j.title + '</h2>' +
@@ -110,6 +120,7 @@
                 '<time datetime="' + j.date + '">' + relatifWaktu(j.date) + '</time>' +
                 (tagsHtml ? '<span>&middot;</span>' + tagsHtml : '') +
               '</div>' +
+              ekstra +
               '<p class="mt-3 text-gray-700 leading-relaxed">' + excerpt + '</p>' +
             '</article>';
         });

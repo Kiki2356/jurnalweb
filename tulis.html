@@ -38,6 +38,31 @@
         ></textarea>
       </div>
 
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">Mood</label>
+        <div id="mood-picker" class="flex gap-2">
+          <button type="button" data-mood="😊" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Senang">😊</button>
+          <button type="button" data-mood="😌" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Tenang">😌</button>
+          <button type="button" data-mood="🥰" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Sayang">🥰</button>
+          <button type="button" data-mood="😢" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Sedih">😢</button>
+          <button type="button" data-mood="😡" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Kesal">😡</button>
+          <button type="button" data-mood="😴" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Capek">😴</button>
+          <button type="button" data-mood="🤔" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Mikir">🤔</button>
+          <button type="button" data-mood="🔥" class="mood-btn text-xl w-10 h-10 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors" title="Semangat">🔥</button>
+        </div>
+        <input type="hidden" id="mood" value="">
+      </div>
+
+      <div>
+        <label for="lagu" class="block text-sm font-medium text-gray-600 mb-1">Musik <span class="text-gray-400 font-normal">(opsional — lagu yang sedang didengar)</span></label>
+        <input
+          id="lagu"
+          type="text"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+          placeholder="Judul Lagu - Artis"
+        >
+      </div>
+
       <button
         id="btn-simpan"
         type="submit"
@@ -81,6 +106,21 @@
       var inpRepo = document.getElementById('gh-repo');
       var modalError = document.getElementById('modal-error');
       var btnGanti = document.getElementById('btn-ganti-konfig');
+      var inpMood = document.getElementById('mood');
+      var inpLagu = document.getElementById('lagu');
+
+      var moodAktif = '';
+
+      document.querySelectorAll('.mood-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.mood-btn').forEach(function (b) {
+            b.classList.remove('border-blue-400', 'bg-blue-50', 'ring-2', 'ring-blue-300');
+          });
+          btn.classList.add('border-blue-400', 'bg-blue-50', 'ring-2', 'ring-blue-300');
+          moodAktif = btn.dataset.mood;
+          inpMood.value = moodAktif;
+        });
+      });
 
       var STORAGE_TOKEN = 'jurnal_gh_token';
       var STORAGE_REPO = 'jurnal_gh_repo';
@@ -183,6 +223,8 @@
             'title: "' + judulFinal + '"\n' +
             'date: ' + tanggalIso + '\n' +
             'tags: []\n' +
+            'mood: "' + (inpMood.value || '-') + '"\n' +
+            'music: "' + (inpLagu.value.trim() || '-') + '"\n' +
             '---\n\n' +
             isiMentah;
 
@@ -219,6 +261,12 @@
 
             judul.value = '';
             isi.value = '';
+            inpLagu.value = '';
+            inpMood.value = '';
+            moodAktif = '';
+            document.querySelectorAll('.mood-btn').forEach(function (b) {
+              b.classList.remove('border-blue-400', 'bg-blue-50', 'ring-2', 'ring-blue-300');
+            });
             isi.focus();
           })
           .catch(function (err) {
