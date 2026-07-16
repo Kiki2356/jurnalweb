@@ -1,4 +1,4 @@
-com.jurnal.app:xml/widget_info = 0x7f0f0000
+com.jurnal.app:xml/widget_info = 0x7f0f0001
 com.jurnal.app:styleable/StateListDrawableItem = 0x7f0e000b
 com.jurnal.app:styleable/StateListDrawable = 0x7f0e000a
 com.jurnal.app:styleable/GlanceAppWidget = 0x7f0e0007
@@ -1651,6 +1651,7 @@ com.jurnal.app:layout/box_center_horizontal_bottom_4children = 0x7f0a0006
 com.jurnal.app:style/TextAppearance.Compat.Notification.Time = 0x7f0d0025
 com.jurnal.app:layout/root_alias_208 = 0x7f0a0380
 com.jurnal.app:drawable/ic_call_answer_video_low = 0x7f06001b
+com.jurnal.app:xml/file_paths = 0x7f0f0000
 com.jurnal.app:drawable/glance_btn_checkbox_checked_to_unchecked_mtrl_animation = 0x7f060005
 com.jurnal.app:layout/size_wrap_match = 0x7f0a0490
 com.jurnal.app:layout/glance_vertical_grid_four_columns_end_top = 0x7f0a0225

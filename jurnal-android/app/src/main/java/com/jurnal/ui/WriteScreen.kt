@@ -112,11 +112,11 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
             // Image picker
             var imageUri by remember { mutableStateOf<Uri?>(null) }
             var imageBase64 by remember { mutableStateOf<String?>(null) }
+            var cameraUri by remember { mutableStateOf<Uri?>(null) }
 
-            val imageLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 uri?.let {
                     imageUri = it
-                    // Read as base64 for upload
                     try {
                         val stream = context.contentResolver.openInputStream(it)
                         val bytes = stream?.readBytes() ?: return@let
@@ -124,6 +124,22 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
                         imageBase64 = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(bytes)
                     } catch (e: Exception) {
                         message = "Gagal baca gambar"
+                    }
+                }
+            }
+
+            val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
+                if (success) {
+                    cameraUri?.let { uri ->
+                        imageUri = uri
+                        try {
+                            val stream = context.contentResolver.openInputStream(uri)
+                            val bytes = stream?.readBytes() ?: return@let
+                            stream.close()
+                            imageBase64 = "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(bytes)
+                        } catch (e: Exception) {
+                            message = "Gagal baca foto"
+                        }
                     }
                 }
             }
@@ -148,11 +164,24 @@ fun WriteScreen(tokenManager: TokenManager, prefill: String = "", onBack: () -> 
                     ) { Text("✕", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface) }
                 }
             } else {
-                OutlinedButton(
-                    onClick = { imageLauncher.launch("image/*") },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("+ Tambah gambar")
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedButton(
+                        onClick = { galleryLauncher.launch("image/*") },
+                        modifier = Modifier.weight(1f)
+                    ) { Text("🖼 Galeri") }
+                    OutlinedButton(
+                        onClick = {
+                            val file = java.io.File(context.cacheDir, "camera_${System.currentTimeMillis()}.jpg")
+                            val uri = androidx.core.content.FileProvider.getUriForFile(
+                                context,
+                                "${context.packageName}.provider",
+                                file
+                            )
+                            cameraUri = uri
+                            cameraLauncher.launch(uri)
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) { Text("📷 Kamera") }
                 }
             }
 
