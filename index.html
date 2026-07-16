@@ -35,6 +35,7 @@
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) { .vinyl { animation: none; } }
     .day-group.collapsed .day-entries { display: none; }
+    .day-group:not(.collapsed) .day-preview { display: none; }
     .day-group.collapsed .chevron { transform: rotate(-90deg); }
     .vinyl {
       width: 48px; height: 48px;
@@ -198,13 +199,29 @@
           var count = groups[dateKey].length;
 
           html +=
-            '<div class="day-group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">' +
-              '<button type="button" class="day-header w-full flex items-center gap-3 px-5 py-4 text-left cursor-pointer" aria-expanded="true">' +
+            '<div class="day-group collapsed bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">' +
+              '<button type="button" class="day-header w-full flex items-center gap-3 px-5 py-4 text-left cursor-pointer" aria-expanded="false">' +
                 '<span class="chevron text-xs text-gray-400 dark:text-gray-500 transition-transform duration-200">▼</span>' +
                 '<span class="font-semibold text-gray-900 dark:text-gray-100">' + niceDate + '</span>' +
                 '<span class="text-sm text-gray-400 dark:text-gray-500">· ' + count + ' catatan</span>' +
-              '</button>' +
-              '<div class="day-entries space-y-3 px-5 pb-5">';
+              '</button>';
+
+          var first = groups[dateKey][0];
+          if (first) {
+            var prevExcerpt = first.content.length > 80 ? first.content.slice(0, 80) + '...' : first.content;
+            html +=
+              '<div class="day-preview px-5 pb-4 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">' +
+                '<p class="line-clamp-2">' + prevExcerpt + '</p>';
+            if (first.mood && first.mood !== '-' || first.music && first.music !== '-') {
+              html += '<div class="flex items-center gap-2 mt-1 text-xs">';
+              if (first.mood && first.mood !== '-') html += '<span>' + first.mood + '</span>';
+              if (first.music && first.music !== '-') html += '<span>♫ ' + first.music + '</span>';
+              html += '</div>';
+            }
+            html += '</div>';
+          }
+
+          html += '<div class="day-entries space-y-3 px-5 pb-5">';
 
           groups[dateKey].forEach(function (j) {
           var truncated = j.content.length > 120;

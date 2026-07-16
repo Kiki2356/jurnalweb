@@ -665,6 +665,13 @@ video {
   margin-top: 1rem;
 }
 
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .block {
   display: block;
 }
@@ -1037,6 +1044,10 @@ video {
 
 .pb-24 {
   padding-bottom: 6rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
 }
 
 .pb-5 {
