@@ -4,9 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jurnal Pribadi</title>
+  <script>
+    if (localStorage.getItem('jurnal_dark') === 'true') {
+      var p = document.createElement('style');
+      p.id = 'gaya-dark';
+      p.textContent = 'body{background-color:#030712!important;color:#f3f4f6!important}.bg-white{background-color:#1f2937!important}.border-gray-200,.border-gray-300{border-color:#374151!important}.text-gray-500{color:#9ca3af!important}.text-gray-700{color:#d1d5db!important}.text-gray-400{color:#6b7280!important}.bg-gray-200{background-color:#374151!important}.text-gray-600{color:#d1d5db!important}.text-blue-600{color:#60a5fa!important}.hover\\:text-blue-800:hover{color:#93bbfd!important}.hover\\:bg-gray-100:hover{background-color:#1f2937!important}';
+      document.head.appendChild(p);
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     article { content-visibility: auto; }
+    body { transition: background-color 0.2s, color 0.2s; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     .vinyl {
       width: 48px; height: 48px;
@@ -254,10 +263,9 @@
     (function () {
       var btn = document.getElementById('btn-dark');
       var simpan = localStorage.getItem('jurnal_dark');
-      var gaya = document.createElement('style');
-      gaya.id = 'gaya-dark';
-      gaya.textContent =
-        'body{background-color:#030712!important;color:#f3f4f6!important;transition:background-color .2s,color .2s}' +
+
+      var CSS_DARK =
+        'body{background-color:#030712!important;color:#f3f4f6!important}' +
         '.bg-white{background-color:#1f2937!important}' +
         '.border-gray-200,.border-gray-300{border-color:#374151!important}' +
         '.text-gray-500{color:#9ca3af!important}' +
@@ -270,11 +278,17 @@
         '.hover\\:bg-gray-100:hover{background-color:#1f2937!important}';
 
       function terapkan(aktif) {
+        var el = document.getElementById('gaya-dark');
         if (aktif) {
-          document.head.appendChild(gaya);
+          if (!el) {
+            el = document.createElement('style');
+            el.id = 'gaya-dark';
+            el.textContent = CSS_DARK;
+            document.head.appendChild(el);
+          }
           btn.textContent = '☀️'; btn.title = 'Mode terang';
         } else {
-          if (gaya.parentNode) gaya.parentNode.removeChild(gaya);
+          if (el) el.parentNode.removeChild(el);
           btn.textContent = '🌙'; btn.title = 'Mode gelap';
         }
       }
