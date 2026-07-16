@@ -12,16 +12,16 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     article { content-visibility: auto; }
-    body { transition: background-color 0.2s, color 0.2s; }
     html.dark body { background-color: #030712 !important; color: #f3f4f6 !important; }
+    html.dark article { background-color: #1f2937 !important; border-color: #374151 !important; }
     html.dark .text-gray-500 { color: #9ca3af !important; }
     html.dark .text-gray-700 { color: #d1d5db !important; }
     html.dark .text-gray-400 { color: #6b7280 !important; }
     html.dark .bg-gray-200 { background-color: #374151 !important; }
     html.dark .text-gray-600 { color: #d1d5db !important; }
     html.dark .text-blue-600 { color: #60a5fa !important; }
-    html.dark .hover\:text-blue-800:hover { color: #93bbfd !important; }
-    html.dark .hover\:bg-gray-100:hover { background-color: #1f2937 !important; }
+    html.dark .read-more { color: #60a5fa !important; }
+    body { transition: background-color 0.2s, color 0.2s; }
     @keyframes vinyl-spin { to { transform: rotate(360deg); } }
     .vinyl {
       width: 48px; height: 48px;
@@ -64,10 +64,10 @@
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">Jurnal Pribadi</h1>
-        <p class="text-gray-500 dark:text-gray-400 mt-1">Catatan harian, sederhana.</p>
+        <p class="text-gray-500 mt-1">Catatan harian, sederhana.</p>
       </div>
       <div class="flex items-center gap-2">
-        <button id="btn-dark" type="button" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-lg" title="Mode gelap">🌙</button>
+        <button id="btn-dark" type="button" class="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-100 transition-colors text-lg" title="Mode gelap">🌙</button>
         <a href="tulis.html" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors">+ Tulis Baru</a>
       </div>
     </div>
@@ -78,7 +78,7 @@
     </div>
   </main>
 
-  <footer class="max-w-2xl mx-auto px-4 pb-8 text-center text-sm text-gray-400 dark:text-gray-600">
+  <footer class="max-w-2xl mx-auto px-4 pb-8 text-center text-sm text-gray-400">
     <p>dibuat dengan teks biasa &mdash; <span id="current-year"></span></p>
   </footer>
 
@@ -162,23 +162,6 @@
       return localStorage.getItem('jurnal_dark') === 'true';
     }
 
-    function segarkanArtikel() {
-      var aktif = gelapAktif();
-      document.querySelectorAll('article').forEach(function (a) {
-        if (aktif) {
-          try {
-            a.style.setProperty('background-color', '#1f2937', 'important');
-            a.style.setProperty('border-color', '#374151', 'important');
-          } catch (e) {
-            a.style.cssText += 'background-color: #1f2937 !important; border-color: #374151 !important;';
-          }
-        } else {
-          a.style.removeProperty('background-color');
-          a.style.removeProperty('border-color');
-        }
-      });
-    }
-
     function renderDaftar(data) {
       var wadah = document.getElementById('journal-list');
 
@@ -192,7 +175,7 @@
           var truncated = j.content.length > 120;
           var excerpt = truncated ? j.content.slice(0, 120) + '...' : j.content;
           var tagsHtml = (j.tags || []).map(function (t) {
-            return '<span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded">#' + t + '</span>';
+            return '<span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">#' + t + '</span>';
           }).join(' ');
 
           var moodHtml = j.mood && j.mood !== '-' ? '<span class="text-lg" title="Mood">' + j.mood + '</span>' : '';
@@ -206,7 +189,7 @@
             musikBlok =
               '<div class="flex items-center gap-3 mt-1">' +
                 coverHtml +
-                '<span class="text-xs text-gray-500 dark:text-gray-400 truncate">' + j.music + '</span>' +
+                '<span class="text-xs text-gray-500 truncate">' + j.music + '</span>' +
               '</div>';
           }
 
@@ -217,24 +200,23 @@
           var gambarHtml = j.image && j.image !== '-' ? '<img src="' + j.image + '" class="w-full max-h-64 object-cover rounded-lg mb-5" loading="lazy">' : '';
 
           html +=
-            '<article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5 shadow-sm">' +
+            '<article class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm">' +
               '<h2 class="text-lg font-semibold leading-snug">' + j.title + '</h2>' +
-              '<div class="flex items-center gap-2 mt-1 text-sm text-gray-500 dark:text-gray-400">' +
+              '<div class="flex items-center gap-2 mt-1 text-sm text-gray-500">' +
                 '<time datetime="' + j.date + '">' + relatifWaktu(j.date) + '</time>' +
                 (tagsHtml ? '<span>&middot;</span>' + tagsHtml : '') +
               '</div>' +
               ekstra +
-              '<div class="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">' +
+              '<div class="mt-3 text-gray-700 leading-relaxed">' +
                 gambarHtml +
                 '<p class="excerpt">' + excerpt + '</p>' +
                 (truncated ? '<p class="full hidden">' + j.content + '</p>' : '') +
               '</div>' +
-              (truncated ? '<button type="button" class="read-more text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm mt-1">Baca selengkapnya</button>' : '') +
+              (truncated ? '<button type="button" class="read-more text-blue-600 hover:text-blue-800 text-sm mt-1">Baca selengkapnya</button>' : '') +
             '</article>';
         });
 
-        wadah.innerHTML = html || '<p class="text-gray-400 dark:text-gray-600 text-center py-12">Belum ada jurnal. Mulai dari <a href="tulis.html" class="underline text-blue-500 dark:text-blue-400">tulis.html</a>.</p>';
-        segarkanArtikel();
+        wadah.innerHTML = html || '<p class="text-gray-400 text-center py-12">Belum ada jurnal. Mulai dari <a href="tulis.html" class="underline text-blue-500">tulis.html</a>.</p>';
       } catch (e) {
         console.error('Gagal render: ' + e.message);
       }
@@ -307,7 +289,6 @@
         html.classList.toggle('dark', aktif);
         btn.textContent = aktif ? '☀️' : '🌙';
         btn.title = aktif ? 'Mode terang' : 'Mode gelap';
-        segarkanArtikel();
       });
     })();
 
