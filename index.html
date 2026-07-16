@@ -8,7 +8,7 @@
     if (localStorage.getItem('jurnal_dark') === 'true') {
       var p = document.createElement('style');
       p.id = 'gaya-dark';
-      p.textContent = 'body{background-color:#030712!important;color:#f3f4f6!important}.bg-white{background-color:#1f2937!important}.border-gray-200,.border-gray-300{border-color:#374151!important}.text-gray-500{color:#9ca3af!important}.text-gray-700{color:#d1d5db!important}.text-gray-400{color:#6b7280!important}.bg-gray-200{background-color:#374151!important}.text-gray-600{color:#d1d5db!important}.text-blue-600{color:#60a5fa!important}.hover\\:text-blue-800:hover{color:#93bbfd!important}.hover\\:bg-gray-100:hover{background-color:#1f2937!important}';
+      p.textContent = 'body{background-color:#030712!important;color:#f3f4f6!important}article{background-color:#1f2937!important;border-color:#374151!important}.text-gray-500{color:#9ca3af!important}.text-gray-700{color:#d1d5db!important}.text-gray-400{color:#6b7280!important}.bg-gray-200{background-color:#374151!important}.text-gray-600{color:#d1d5db!important}.text-blue-600{color:#60a5fa!important}.hover\\:text-blue-800:hover{color:#93bbfd!important}.hover\\:bg-gray-100:hover{background-color:#1f2937!important}';
       document.head.appendChild(p);
     }
   </script>
@@ -266,8 +266,7 @@
 
       var CSS_DARK =
         'body{background-color:#030712!important;color:#f3f4f6!important}' +
-        '.bg-white{background-color:#1f2937!important}' +
-        '.border-gray-200,.border-gray-300{border-color:#374151!important}' +
+        'article{background-color:#1f2937!important;border-color:#374151!important}' +
         '.text-gray-500{color:#9ca3af!important}' +
         '.text-gray-700{color:#d1d5db!important}' +
         '.text-gray-400{color:#6b7280!important}' +
