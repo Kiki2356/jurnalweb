@@ -51,7 +51,8 @@ class WriteWidgetActivity : ComponentActivity() {
                 WriteWidgetSheet(
                     token = token,
                     repo = repo,
-                    onSaved = {
+                    onSaved = { preview, date ->
+                        prefs.edit().putString("preview", preview).putString("preview_date", date).apply()
                         JournalWidgetReceiver.refreshWidget(this@WriteWidgetActivity)
                         finish()
                     },
@@ -64,7 +65,7 @@ class WriteWidgetActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WriteWidgetSheet(token: String, repo: String, onSaved: () -> Unit, onClose: () -> Unit) {
+fun WriteWidgetSheet(token: String, repo: String, onSaved: (preview: String, date: String) -> Unit, onClose: () -> Unit) {
     var text by remember { mutableStateOf("") }
     var mood by remember { mutableStateOf("") }
     var saving by remember { mutableStateOf(false) }
@@ -125,7 +126,11 @@ fun WriteWidgetSheet(token: String, repo: String, onSaved: () -> Unit, onClose: 
                             val ok = withContext(Dispatchers.IO) {
                                 JournalRepository(token, repo).saveJournal(journal, null)
                             }
-                            if (ok) onSaved() else saving = false
+                            if (ok) {
+                                val previewText = text.take(80).replace("\n", " ") + if (text.length > 80) "..." else ""
+                                val today = SimpleDateFormat("dd MMM", Locale("id", "ID")).format(Date())
+                                onSaved(previewText, today)
+                            } else saving = false
                         } catch (_: Exception) { saving = false }
                     }
                 },
