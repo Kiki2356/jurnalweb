@@ -1,14 +1,14 @@
 [
     {
-        "merged": "com.jurnal.app-merged_res-52:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.jurnal.app-main-54:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.jurnal.app-merged_res-54:/layout_widget_layout.xml.flat",
+        "source": "com.jurnal.app-main-56:/layout/widget_layout.xml"
     },
     {
-        "merged": "com.jurnal.app-merged_res-52:/layout_widget_layout.xml.flat",
-        "source": "com.jurnal.app-main-54:/layout/widget_layout.xml"
+        "merged": "com.jurnal.app-merged_res-54:/xml_widget_info.xml.flat",
+        "source": "com.jurnal.app-main-56:/xml/widget_info.xml"
     },
     {
-        "merged": "com.jurnal.app-merged_res-52:/xml_widget_info.xml.flat",
-        "source": "com.jurnal.app-main-54:/xml/widget_info.xml"
+        "merged": "com.jurnal.app-merged_res-54:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.jurnal.app-main-56:/drawable/ic_launcher_foreground.xml"
     }
 ]

@@ -5,4 +5,5 @@ id widget_preview
 id widget_tulis
 layout widget_layout
 string app_name
+style Theme.Jurnal
 xml widget_info

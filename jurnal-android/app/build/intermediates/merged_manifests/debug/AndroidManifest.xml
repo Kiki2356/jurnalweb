@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar" >
         <activity
-            android:name="com.jurnal.app.MainActivity"
+            android:name="com.jurnal.MainActivity"
             android:exported="true"
             android:launchMode="singleTask" >
             <intent-filter>
@@ -47,7 +47,7 @@
         </activity>
 
         <receiver
-            android:name="com.jurnal.app.widget.JournalWidgetReceiver"
+            android:name="com.jurnal.widget.JournalWidgetReceiver"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

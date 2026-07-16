@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.jurnal.app-mergeDebugResources-50:/values-ru/values-ru.xml",
+            "outputFile": "com.jurnal.app-mergeDebugResources-52:/values-ru/values-ru.xml",
             "map": [
                 {
                     "source": "/home/dhash/.gradle/caches/transforms-3/a535d965b3dc37d268d1a2b6329acea3/transformed/material3-release/res/values-ru/values-ru.xml",

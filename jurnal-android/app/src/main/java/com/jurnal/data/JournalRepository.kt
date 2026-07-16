@@ -1,21 +1,30 @@
 package com.jurnal.data
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
+data class RawJournal(val name: String = "", val content: String = "")
+
 class JournalRepository(private val token: String, private val repo: String) {
 
     private val baseUrl = "https://api.github.com/repos/$repo"
+    private val gson = Gson()
 
     suspend fun fetchJournals(): List<Journal> = withContext(Dispatchers.IO) {
         try {
             val url = URL("https://jurnalweb.netlify.app/.netlify/functions/journals")
             val json = url.readText()
-            parseJournals(json)
+            val type = object : TypeToken<List<RawJournal>>() {}.type
+            val rawList: List<RawJournal> = gson.fromJson(json, type)
+            rawList.map { parseFrontmatter(it.content) }
         } catch (e: Exception) {
+            e.printStackTrace()
             emptyList()
         }
     }
@@ -25,7 +34,6 @@ class JournalRepository(private val token: String, private val repo: String) {
             val now = SimpleDateFormat("yyyy-MM-dd-HHmmss", Locale.US).format(Date())
             val fileName = "$now.md"
 
-            // Upload image first if present
             var imageUrl = ""
             if (imageBase64 != null) {
                 val ext = imageBase64.substringAfter("image/").substringBefore(";").ifEmpty { "png" }
@@ -35,7 +43,6 @@ class JournalRepository(private val token: String, private val repo: String) {
                 imageUrl = "https://raw.githubusercontent.com/$repo/main/journals/images/$imgName"
             }
 
-            // Build markdown
             val md = buildString {
                 appendLine("---")
                 appendLine("title: \"${journal.title}\"")
@@ -53,37 +60,24 @@ class JournalRepository(private val token: String, private val repo: String) {
             uploadFile("journals/$fileName", b64, "jurnal: ${journal.title}")
             true
         } catch (e: Exception) {
+            e.printStackTrace()
             false
         }
     }
 
     private fun uploadFile(path: String, base64: String, message: String) {
         val url = URL("$baseUrl/contents/$path")
-        val conn = url.openConnection() as java.net.HttpURLConnection
+        val conn = url.openConnection() as HttpURLConnection
         conn.requestMethod = "PUT"
         conn.setRequestProperty("Authorization", "token $token")
         conn.setRequestProperty("Content-Type", "application/json")
         conn.doOutput = true
-
         val body = """{"message":"$message","content":"$base64","branch":"main"}"""
         conn.outputStream.write(body.toByteArray())
-
         if (conn.responseCode !in 200..299) {
             throw Exception("GitHub API error: ${conn.responseCode}")
         }
         conn.disconnect()
-    }
-
-    private fun parseJournals(json: String): List<Journal> {
-        // Simple JSON parsing using org.json or manual — using basic approach
-        val journals = mutableListOf<Journal>()
-        val entries = json.split("""{"name":""").drop(1)
-        for (entry in entries) {
-            val content = entry.substringAfter(""""content":"""").substringBefore("""",""")
-                .replace("\\n", "\n").replace("\\\"", "\"").replace("\\/", "/")
-            journals.add(parseFrontmatter(content))
-        }
-        return journals
     }
 
     private fun parseFrontmatter(raw: String): Journal {

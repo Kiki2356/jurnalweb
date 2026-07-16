@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.jurnal.app-mergeDebugResources-50:/values-pt-rPT/values-pt-rPT.xml",
+            "outputFile": "com.jurnal.app-mergeDebugResources-52:/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
                     "source": "/home/dhash/.gradle/caches/transforms-3/91fe5c63c31191b850e75e2a1f8b507c/transformed/glance-appwidget-1.0.0/res/values-pt-rPT/values-pt-rPT.xml",
