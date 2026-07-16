@@ -223,7 +223,10 @@
                 '<p class="excerpt text-pretty">' + excerpt + '</p>' +
                 (truncated ? '<p class="full hidden">' + j.content + '</p>' : '') +
               '</div>' +
-              (ekstra ? '<div class="mt-4 flex items-center gap-3">' + moodShow + musikShow + '</div>' : '') +
+              (moodShow || musikShow ? '<div class="mt-4 flex items-center justify-between gap-3">' + 
+                '<span>' + moodShow + '</span>' +
+                '<span class="flex items-center gap-3">' + musikShow + '</span>' +
+              '</div>' : '') +
               (truncated ? '<button type="button" class="read-more text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm mt-2">Baca selengkapnya</button>' : '') +
             '</article>';
         });
